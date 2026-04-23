@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Duckzi — Game Developer & Creator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,26 +38,18 @@
       padding: 2rem 2.5rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      justify-content: center; /* 👈 THIS centers everything */
+      gap: 2rem;
       border-bottom: 1px solid rgba(0,0,0,0.07);
       position: sticky;
       top: 0;
       z-index: 100;
     }
 
-    .nav-logo {
-      font-family: 'Lora', serif;
-      font-weight: 600;
-      font-size: 1.7rem;
-      color: #4a3f6b;
-      text-decoration: none;
-      letter-spacing: -0.3px;
-      margin-right: auto;
-    }
 
     .nav-links {
       display: flex;
-      gap: 0.2rem;
+      gap: 1rem;
       list-style: none;
       align-items: center;
     }
@@ -64,10 +57,10 @@
     .nav-links li { position: relative; }
 
     .nav-links a, .nav-btn {
-      color: #6e6585;
+      color: #1f1f1f;
       text-decoration: none;
-      font-size: 0.875rem;
-      padding: 0.4rem 0.85rem;
+      font-size: 1.3rem;
+      padding: 1rem 1rem;
       border-radius: 999px;
       transition: background 0.2s, color 0.2s;
       display: inline-flex;
@@ -77,11 +70,28 @@
       border: none;
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
     }
 
     .nav-links a:hover, .nav-btn:hover {
-      background: rgba(74,63,107,0.08);
-      color: #2d2a35;
+      background: transparent; /* removes bubble */
+      color: #7b6aaa;          /* purple hover text */
+    }
+    .nav-socials {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .nav-socials a {
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #1f1f1f;
+      transition: color 0.2s;
+    }
+
+    .nav-socials a:hover {
+      color: #7b6aaa;
     }
 
     .arrow { font-size: 0.6rem; opacity: 0.5; transition: transform 0.2s; }
@@ -90,12 +100,12 @@
     .dropdown {
       display: none;
       position: absolute;
-      top: calc(100% + 0.5rem);
+      top: calc(100% + 0.15rem);
       left: 0;
       background: #fefcfa;
       border: 1px solid rgba(0,0,0,0.08);
       border-radius: 16px;
-      padding: 0.5rem;
+      padding: 0.1rem;
       min-width: 215px;
       box-shadow: 0 6px 28px rgba(0,0,0,0.1);
     }
@@ -105,15 +115,19 @@
     .dropdown a {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
-      padding: 0.55rem 0.75rem;
+      gap: 0.5rem;
+      padding: 1rem 1rem;
       border-radius: 10px;
-      color: #5a5272;
-      font-size: 0.855rem;
+      color: #1f1f1f;
+      font-size: 1.3rem;
       text-decoration: none;
     }
 
-    .dropdown a:hover { background: rgba(74,63,107,0.07); color: #2d2a35; }
+    .dropdown a:hover {
+      background: transparent;
+      color: #7b6aaa;
+      font-weight: 700;
+    }
 
     .icon {
       width: 28px; height: 28px;
@@ -269,19 +283,42 @@
   <div class="blob blob-3"></div>
 
   <nav>
-    <a class="nav-logo" href="index.html">Duckzi</a>
+    
+    <div class="nav-left"></div>
+
+
+
     <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
       <li>
-        <button class="nav-btn">Work <span class="arrow">▼</span></button>
+        <button class="nav-btn">Games <span class="arrow">▼</span></button>
         <div class="dropdown">
-          <a href="games.html"><span class="icon icon-games">🎮</span>Video Games</a>
-          <a href="art.html"><span class="icon icon-art">🎨</span>Concept Art</a>
-          <a href="minecraft.html"><span class="icon icon-mc">⛏️</span>Minecraft</a>
-          <a href="universe.html"><span class="icon icon-uni">🌌</span>Universe Creation</a>
+          <a href="mira.html"><span class="icon icon-games">M</span>Mira</a>
+        </div>
+      <li><a href="minecraft.html">Minecraft</a></li>
+      <li>
+        <button class="nav-btn">Art <span class="arrow">▼</span></button>
+        <div class="dropdown">
+          <a href="universeart.html"><span class="icon icon-games">U</span>Universe</a>
+          <a href="overwatchart.html"><span class="icon icon-art">O</span>Overwatch</a>
+          <a href="cobblemonart.html"><span class="icon icon-mc">C</span>Cobblemon</a>
         </div>
       </li>
+      <li><a href="universe.html">Universe</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
+
+    <div class="nav-socials">
+      <a href="#" title="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="#" title="Reddit">
+        <i class="fa-brands fa-reddit-alien"></i>
+      </a>
+      <a href="contact.html" title="Contact">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+    </div>
   </nav>
 
   <section class="hero">
