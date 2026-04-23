@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Duckzi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f3ef;
+      color: #2d2a35;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 420px; height: 420px; background: #d4cef5; top: -100px; right: -80px; }
+    .blob-2 { width: 340px; height: 340px; background: #f5dfc8; bottom: 60px; left: -80px; }
+    .blob-3 { width: 260px; height: 260px; background: #c9e8d8; top: 40%; left: 35%; }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(250,248,244,0.85);
+      backdrop-filter: blur(14px);
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #4a3f6b;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+      margin-right: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links li { position: relative; }
+
+    .nav-links a, .nav-btn {
+      color: #6e6585;
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .nav-links a:hover, .nav-btn:hover {
+      background: rgba(74,63,107,0.08);
+      color: #2d2a35;
+    }
+
+    .arrow { font-size: 0.6rem; opacity: 0.5; transition: transform 0.2s; }
+    .nav-links li:hover .arrow { transform: rotate(180deg); }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      background: #fefcfa;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 0.5rem;
+      min-width: 215px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
+    }
+
+    .nav-links li:hover .dropdown { display: block; }
+
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
+      color: #5a5272;
+      font-size: 0.855rem;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover { background: rgba(74,63,107,0.07); color: #2d2a35; }
+
+    .icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .icon-games { background: #ddeefa; }
+    .icon-art   { background: #fdefd8; }
+    .icon-mc    { background: #d8f0e4; }
+    .icon-uni   { background: #ece8fa; }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 760px;
+      margin: auto;
+      padding: 5rem 2.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #a89fc0;
+      margin-bottom: 1.25rem;
+    }
+
+    .page h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      color: #2d2a35;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .page h1 .accent { color: #7b6aaa; }
+
+    /* PROFILE CARD */
+    .profile-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 22px;
+      padding: 2rem;
+      display: flex;
+      gap: 1.75rem;
+      align-items: flex-start;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+      backdrop-filter: blur(6px);
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c4b8e8, #e8d5c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      flex-shrink: 0;
+    }
+
+    .profile-info h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-info .role {
+      font-size: 0.85rem;
+      color: #9d8fcf;
+      margin-bottom: 1rem;
+    }
+
+    .profile-info p {
+      font-size: 0.92rem;
+      color: #7e789e;
+      line-height: 1.8;
+      max-width: 460px;
+    }
+
+    /* SKILLS */
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(123,106,170,0.08);
+      border: 1px solid rgba(123,106,170,0.15);
+      color: #7b6aaa;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+    }
+
+    /* LINK CARDS */
+    .link-card {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+      margin-bottom: 0.75rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .link-card:hover {
+      box-shadow: 0 6px 22px rgba(100,80,160,0.1);
+      transform: translateY(-2px);
+    }
+
+    .link-card .link-icon {
+      font-size: 1.4rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(123,106,170,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .link-card h3 {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #2d2a35;
+      margin-bottom: 0.15rem;
+    }
+
+    .link-card p {
+      font-size: 0.78rem;
+      color: #9e98b2;
+    }
+
+    .link-card .arrow-out {
+      margin-left: auto;
+      color: #c4bedd;
+      font-size: 1rem;
+    }
+
+    footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #b8b2c8;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Duckzi</a>
+    <ul class="nav-links">
+      <li>
+        <button class="nav-btn">Work <span class="arrow">▼</span></button>
+        <div class="dropdown">
+          <a href="games.html"><span class="icon icon-games">🎮</span>Video Games</a>
+          <a href="art.html"><span class="icon icon-art">🎨</span>Concept Art</a>
+          <a href="minecraft.html"><span class="icon icon-mc">⛏️</span>Minecraft</a>
+          <a href="universe.html"><span class="icon icon-uni">🌌</span>Universe Creation</a>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <p class="eyebrow">The person behind it all</p>
+    <h1>About <span class="accent">me</span></h1>
+
+    <!-- ✏️ Fill in your own info below! -->
+    <div class="profile-card">
+      <div class="avatar">🦆</div>
+      <div class="profile-info">
+        <h2>Duckzi</h2>
+        <p class="role">Game Developer · World Builder · Visual Creator</p>
+        <!-- ✏️ Replace this with your own bio! -->
+        <p>I'm a creative developer with a passion for building worlds — whether that's a video game, a Minecraft map, a piece of concept art, or an entire fictional universe. I love bringing ideas to life from scratch.</p>
+      </div>
+    </div>
+
+    <!-- ✏️ Add or remove tags as you like -->
+    <h2 class="section-title">Skills & tools</h2>
+    <div class="tags">
+      <span class="tag">Game Development</span>
+      <span class="tag">Concept Art</span>
+      <span class="tag">Worldbuilding</span>
+      <span class="tag">Minecraft Modding</span>
+      <span class="tag">Map Design</span>
+      <span class="tag">Lore Writing</span>
+    </div>
+
+    <!-- ✏️ Replace href="#" with your real links -->
+    <h2 class="section-title">Find me & my work</h2>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">📄</div>
+      <div>
+        <h3>Resume</h3>
+        <p>Download or view my full resume</p>
+      </div>
+      <span class="arrow-out">↗</span>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">🎬</div>
+      <div>
+        <h3>YouTube / Media</h3>
+        <p>Videos, devlogs, and more</p>
+      </div>
+      <span class="arrow-out">↗</span>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">💬</div>
+      <div>
+        <h3>Discord / Social</h3>
+        <p>Come hang out or reach out</p>
+      </div>
+      <span class="arrow-out">↗</span>
+    </a>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Duckzi. All rights reserved.
+  </footer>
+
+</body>
+</html>
