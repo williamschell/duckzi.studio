@@ -6,7 +6,7 @@
     "title": "mira — game jam release",
     "subtitle": "a short sci-fi puzzle-narrative experience",
     "description": "My latest release, Mira was made in less than three days for the Virginia Inter-Collegiate Game Jam 2026.",
-    "image": "",
+    "image": [],
     "date": "2025-06-01",
     "tags": ["game", "mira", "devlog"],
     "content": "<p>This game was a long time coming, my first one in fact! I have been working on projects on Scratch, Unity, Godot and Unreal since I was in 5th grade. I have been constantly starting new projects every other month or so for the past few years. Mira was a project to show that if I sat down and committed to a project I could get it done. All of the music, 2d art, (most of) the 3d art and writing was done by me.</p>"
@@ -18,7 +18,7 @@
     "title": "Cobblemon Trainer Sheet",
     "subtitle": "Original trainer design for my Cobblemon server.",
     "description": "A full trainer character sheet designed for my custom Cobblemon modded server.",
-    "image": "",
+    "image": [],
     "date": "2025-05-10",
     "tags": ["art", "cobblemon", "concept-art", "minecraft"],
     "content": "<p>For my custom Cobblemon server I wanted an original trainer character that fit the world — not a Pokémon-style design, but something that felt like it belonged in a Minecraft-adjacent universe with its own visual rules.</p><h2>The Design</h2><p>The trainer uses a earthy, practical color palette. Lots of greens and browns — the kind of person who actually spends time in the wilderness rather than looking like they're about to walk a runway.</p><p>The sheet includes front, side, and back views, plus outfit variant sketches and a color palette breakdown. I also did a few expression studies to get the face to feel consistent across different angles.</p><h2>Server Context</h2><p>This character is used as the default 'wandering trainer' NPC on the server. If you've played on it, you've probably run into them.</p>"
@@ -30,7 +30,7 @@
     "title": "The First Fracture",
     "subtitle": "How the universe began. Or at least, how I think it did.",
     "description": "A lore piece about the founding event of my universe — the moment the world split into its three realms.",
-    "image": "",
+    "image": [],
     "date": "2025-04-28",
     "tags": ["writing", "universe", "lore"],
     "content": "<p>Before the three realms there was one — a single unbroken place that didn't have a name because nothing in it had yet learned to name things. It was full and it was silent and it was, as far as anyone would later be able to tell, content.</p><p>Then came the Fracture.</p><h2>What the Texts Say</h2><p>The oldest written records in the universe's history — fragments preserved in the Archive of Vel — describe the Fracture not as a catastrophe but as a decision. Something chose to divide. Whether that something was a being, a force, or simply the weight of existing without purpose, the texts don't agree on.</p><p>What they do agree on: the split happened in three directions simultaneously. Not two halves. Three pieces. And the spaces between those pieces became the borders that define the world today.</p><h2>What It Means for the Story</h2><p>The Fracture isn't just backstory. It's the reason the three realms have never fully trusted each other, and it's the thread that connects the main cast of Mira in ways they don't fully understand yet.</p><p>More lore entries to come. This is just the first crack in the wall.</p>"
@@ -42,7 +42,7 @@
     "title": "Survival World v2 — Full Rebuild",
     "subtitle": "Bigger, better, more cursed.",
     "description": "A complete rebuild of my main Minecraft survival world with new spawn, rules, and custom mods.",
-    "image": "",
+    "image": [],
     "date": "2025-04-15",
     "tags": ["minecraft", "map", "modding"],
     "content": "<p>The original survival world had a good run. After about eight months it had accumulated enough problems — corrupted chunks, spawn area that made no sense, mods that conflicted with each other in increasingly creative ways — that a full rebuild was honestly a relief.</p><h2>What's New</h2><p>The new spawn is built around a central hub structure that actually makes geographic sense. Roads go places. The biome was chosen intentionally. There's a reason to explore in every direction from the start point.</p><p>Mod-wise, I rebuilt the pack from scratch. Kept the essentials, cut the ones that were causing issues, and added a handful of new ones that I've been wanting to test for a while. The full mod list is on the server page.</p><h2>Custom Rules</h2><p>V2 also introduces a few new server rules that came directly from what went wrong in V1. Nothing restrictive — mostly just guardrails that keep the shared world feeling shared rather than five separate single-player games happening in the same space.</p><p>If you were on V1, your builds were preserved where possible. Check the Discord for the preservation map.</p>"
@@ -54,7 +54,7 @@
     "title": "Solen — Character Sheet",
     "subtitle": "One of the three main characters of the universe.",
     "description": "Full character art for Solen, a key figure in the universe's second era.",
-    "image": "",
+    "image": [],
     "date": "2025-03-30",
     "tags": ["art", "universe", "concept-art"],
     "content": "<p>Solen is one of the three central characters in the universe — specifically in the second era, which is where most of the active story takes place. Designing her took a while because she occupies an unusual position: she's someone who belongs to more than one realm, and that had to be visible in how she looks.</p><h2>Visual Direction</h2><p>The design uses a split palette — warm tones on one side, cool on the other. It's not subtle, but it's intentional. She's literally caught between two worlds and the design makes that legible at a glance.</p><p>The silhouette is built around movement. She travels constantly throughout the story, so the clothing needed to read as practical without looking mundane. There's ornamentation, but it's earned — each piece has a story reason for being there.</p><h2>What's in the Sheet</h2><p>The full sheet includes a front/back reference, three-quarter view, close-up facial reference, hand studies (she's expressive with her hands), and palette annotations explaining where each color comes from narratively.</p><p>Solen will appear in more posts as the universe content ramps up.</p>"
