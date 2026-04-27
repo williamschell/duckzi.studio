@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art — Duckzi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f3ef;
+      color: #2d2a35;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; pointer-events: none; z-index: 0; }
+    .blob-1 { width: 420px; height: 420px; background: #d4cef5; top: -100px; right: -80px; }
+    .blob-2 { width: 340px; height: 340px; background: #f5dfc8; bottom: 60px; left: -80px; }
+    .blob-3 { width: 260px; height: 260px; background: #c9e8d8; top: 40%; left: 35%; }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(250,248,244,0.88);
+      backdrop-filter: blur(14px);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 68px;
+    }
+
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+    .nav-links li { position: relative; }
+
+    .nav-links a, .nav-btn {
+      color: #1f1f1f;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+    }
+    .nav-links a:hover, .nav-btn:hover { color: #7b6aaa; }
+    .nav-links a.active { color: #7b6aaa; }
+
+    .arrow { font-size: 0.55rem; opacity: 0.5; transition: transform 0.2s; }
+    .nav-links li:hover .arrow { transform: rotate(180deg); }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.4rem);
+      left: 0;
+      background: #fefcfa;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 0.4rem;
+      min-width: 180px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      z-index: 200;
+    }
+    .nav-links li:hover .dropdown { display: block; }
+
+    .dropdown a {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 0.8rem; border-radius: 8px;
+      color: #1f1f1f; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: color 0.15s;
+    }
+    .dropdown a:hover { color: #7b6aaa; }
+
+    .icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; font-weight: 700; }
+    .icon-games { background: #ddeefa; color: #3a7abf; }
+    .icon-mc    { background: #d8f0e4; color: #2a8a50; }
+
+    .nav-socials { display: flex; gap: 1.25rem; align-items: center; }
+    .nav-socials a { font-size: 1.2rem; color: #1f1f1f; text-decoration: none; transition: color 0.2s; }
+    .nav-socials a:hover { color: #7b6aaa; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: 960px;
+      margin: auto;
+      padding: 3.5rem 2.5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #c0baca;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-header h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: #2d2a35;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header h1 .accent { color: #7b6aaa; font-style: italic; }
+
+    .page-header p {
+      font-size: 0.92rem;
+      color: #8a849c;
+      line-height: 1.75;
+      max-width: 520px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem 2.5rem 0;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c0baca;
+      margin-right: 0.25rem;
+    }
+
+    .filter-btn {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.09);
+      color: #6e6585;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.18s;
+      backdrop-filter: blur(4px);
+    }
+
+    .filter-btn:hover {
+      border-color: #c4b8e8;
+      color: #7b6aaa;
+    }
+
+    .filter-btn.active {
+      background: #7b6aaa;
+      border-color: #7b6aaa;
+      color: #fff;
+    }
+
+    /* ── GRID ── */
+    .content-section {
+      max-width: 960px;
+      margin: auto;
+      padding: 1.75rem 2.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 700px)  { .post-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 701px) and (max-width: 960px) { .post-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .post-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+
+    .post-card:hover {
+      box-shadow: 0 8px 28px rgba(100,80,160,0.13);
+      transform: translateY(-3px);
+    }
+
+    /* fade out cards that don't match filter */
+    .post-card.hidden {
+      display: none;
+    }
+
+    .post-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .post-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+
+    .type-art { background: linear-gradient(135deg, #fdefd8, #f5dfc8); }
+
+    .post-body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+
+    .post-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.55rem; flex-wrap: wrap; }
+
+    .tag-pill {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(123,106,170,0.1);
+      color: #7b6aaa;
+    }
+
+    .post-date { font-size: 0.7rem; color: #bab4cc; margin-left: auto; }
+
+    .post-body h3 {
+      font-family: 'Lora', serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .post-body .post-sub {
+      font-size: 0.78rem;
+      color: #9e98b2;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .empty-msg {
+      color: #bab4cc;
+      font-size: 0.9rem;
+      padding: 3rem 0;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .loading-msg { color: #bab4cc; font-size: 0.88rem; padding: 1rem 0; }
+
+    footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #b8b2c8;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- NAV -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <button class="nav-btn">Games <span class="arrow">▼</span></button>
+        <div class="dropdown">
+          <a href="mira.html"><span class="icon icon-games">M</span>Mira</a>
+        </div>
+      </li>
+      <li><a href="minecraft.html">Minecraft</a></li>
+      <li><a href="art.html" class="active">Art</a></li>
+      <li><a href="universe.html">Universe</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-socials">
+      <a href="https://www.instagram.com/william._schell/" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" title="Reddit"><i class="fa-brands fa-reddit-alien"></i></a>
+      <a href="contact.html" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Portfolio</p>
+    <h1>My <span class="accent">Art</span></h1>
+    <p>Concept art, character sheets, fan art, and more. Use the filters below to browse by category.</p>
+  </div>
+
+  <!-- FILTER BUTTONS — built dynamically from tags in posts.json -->
+  <div class="filter-bar" id="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <!-- more buttons injected by JS based on what tags exist -->
+  </div>
+
+  <!-- GRID -->
+  <section class="content-section">
+    <div class="post-grid" id="posts-container">
+      <p class="loading-msg">Loading...</p>
+    </div>
+  </section>
+
+  <footer>&copy; 2025 Duckzi. All rights reserved.</footer>
+
+  <script>
+    function fmtDate(d) {
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+    }
+
+    // Tags that should NOT appear as filter buttons (too generic or internal)
+    const HIDDEN_TAGS = ['art', 'concept-art'];
+
+    // Pretty labels for tags — add entries here as you add new art categories
+    const TAG_LABELS = {
+      'overwatch':        'Overwatch',
+      'cobblemon':        'Cobblemon',
+      'universe':         'Universe',
+      'character-design': 'Characters',
+      'minecraft':        'Minecraft',
+      'fan-art':          'Fan Art',
+      'landscape':        'Landscapes',
+      'creature':         'Creatures',
+    };
+
+    let allPosts = [];
+    let activeFilter = 'all';
+
+    function renderCards(posts) {
+      const container = document.getElementById('posts-container');
+      if (!posts.length) {
+        container.innerHTML = '<p class="empty-msg">Nothing here yet — check back soon!</p>';
+        return;
+      }
+
+      container.innerHTML = posts.map(p => {
+        // collect displayable tags (not hidden ones)
+        const visibleTags = (p.tags || []).filter(t => !HIDDEN_TAGS.includes(t));
+        const tagPills = visibleTags
+          .map(t => `<span class="tag-pill">${TAG_LABELS[t] || t}</span>`)
+          .join('');
+
+        const imgHtml = p.image
+          ? `<img src="${p.image}" alt="${p.title}" onerror="this.style.display='none'">`
+          : '🎨';
+
+        return `
+          <a class="post-card" href="post.html?id=${p.id}" data-tags="${(p.tags||[]).join(' ')}">
+            <div class="post-img type-art">${imgHtml}</div>
+            <div class="post-body">
+              <div class="post-meta">
+                ${tagPills}
+                <span class="post-date">${fmtDate(p.date)}</span>
+              </div>
+              <h3>${p.title}</h3>
+              ${p.subtitle ? `<p class="post-sub">${p.subtitle}</p>` : ''}
+            </div>
+          </a>`;
+      }).join('');
+
+      applyFilter(activeFilter);
+    }
+
+    function applyFilter(tag) {
+      activeFilter = tag;
+
+      // update button states
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === tag);
+      });
+
+      // show/hide cards
+      document.querySelectorAll('.post-card').forEach(card => {
+        const cardTags = card.dataset.tags || '';
+        const match = tag === 'all' || cardTags.split(' ').includes(tag);
+        card.classList.toggle('hidden', !match);
+      });
+
+      // show empty message if nothing visible
+      const visible = [...document.querySelectorAll('.post-card')].filter(c => !c.classList.contains('hidden'));
+      const existing = document.querySelector('.empty-msg');
+      if (existing) existing.remove();
+      if (!visible.length) {
+        const msg = document.createElement('p');
+        msg.className = 'empty-msg';
+        msg.textContent = 'No art in this category yet — check back soon!';
+        document.getElementById('posts-container').appendChild(msg);
+      }
+    }
+
+    function buildFilterButtons(posts) {
+      // collect all unique tags across art posts, excluding hidden ones
+      const tagSet = new Set();
+      posts.forEach(p => (p.tags || []).forEach(t => {
+        if (!HIDDEN_TAGS.includes(t)) tagSet.add(t);
+      }));
+
+      const bar = document.getElementById('filter-bar');
+      tagSet.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = tag;
+        btn.textContent = TAG_LABELS[tag] || tag;
+        btn.addEventListener('click', () => applyFilter(tag));
+        bar.appendChild(btn);
+      });
+
+      // wire up the "All" button
+      document.querySelector('[data-filter="all"]').addEventListener('click', () => applyFilter('all'));
+    }
+
+    fetch('posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        // only show art posts on this page
+        const artPosts = posts
+          .filter(p => p.type === 'art')
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        buildFilterButtons(artPosts);
+        renderCards(artPosts);
+      })
+      .catch(() => {
+        document.getElementById('posts-container').innerHTML = '<p class="loading-msg">Could not load posts.</p>';
+      });
+  </script>
+</body>
+</html>
