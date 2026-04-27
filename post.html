@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — Duckzi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f3ef;
+      color: #2d2a35;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; pointer-events: none; z-index: 0; }
+    .blob-1 { width: 420px; height: 420px; background: #d4cef5; top: -100px; right: -80px; }
+    .blob-2 { width: 340px; height: 340px; background: #f5dfc8; bottom: 60px; left: -80px; }
+    .blob-3 { width: 260px; height: 260px; background: #c9e8d8; top: 40%; left: 35%; }
+
+    /* ── NAV ── */
+    nav {
+      background: rgba(250,248,244,0.88);
+      backdrop-filter: blur(14px);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 68px;
+    }
+
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+    .nav-links li { position: relative; }
+
+    .nav-links a, .nav-btn {
+      color: #1f1f1f;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+    }
+    .nav-links a:hover, .nav-btn:hover { color: #7b6aaa; }
+
+    .arrow { font-size: 0.55rem; opacity: 0.5; transition: transform 0.2s; }
+    .nav-links li:hover .arrow { transform: rotate(180deg); }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.4rem);
+      left: 0;
+      background: #fefcfa;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 0.4rem;
+      min-width: 180px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      z-index: 200;
+    }
+    .nav-links li:hover .dropdown { display: block; }
+
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 0.8rem;
+      border-radius: 8px;
+      color: #1f1f1f;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .dropdown a:hover { color: #7b6aaa; }
+
+    .icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; font-weight: 700; }
+    .icon-games { background: #ddeefa; color: #3a7abf; }
+    .icon-art   { background: #fdefd8; color: #b07a2a; }
+    .icon-mc    { background: #d8f0e4; color: #2a8a50; }
+    .icon-uni   { background: #ece8fa; color: #7b6aaa; }
+
+    .nav-socials { display: flex; gap: 1.25rem; align-items: center; }
+    .nav-socials a { font-size: 1.2rem; color: #1f1f1f; text-decoration: none; transition: color 0.2s; }
+    .nav-socials a:hover { color: #7b6aaa; }
+
+    /* ── BACK LINK ── */
+    .back-bar {
+      max-width: 780px;
+      margin: auto;
+      padding: 1.75rem 2.5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #9e98b2;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #7b6aaa; }
+
+    /* ── ARTICLE ── */
+    .article {
+      max-width: 780px;
+      margin: auto;
+      padding: 2.5rem 2.5rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* header area */
+    .article-header { margin-bottom: 2.5rem; }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .type-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+    .badge-art       { background: #fdefd8; color: #b07a2a; }
+    .badge-writing   { background: #ece8fa; color: #7b6aaa; }
+    .badge-minecraft { background: #d8f0e4; color: #2a8a50; }
+    .badge-game      { background: #ddeefa; color: #3a7abf; }
+
+    .article-date { font-size: 0.78rem; color: #bab4cc; }
+
+    .article-header h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 600;
+      color: #2d2a35;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .article-subtitle {
+      font-size: 1.05rem;
+      color: #7b6aaa;
+      font-style: italic;
+      font-family: 'Lora', serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* hero image */
+    .article-hero-img {
+      width: 100%;
+      aspect-ratio: 16/7;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .article-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .img-type-art       { background: linear-gradient(135deg, #fdefd8, #f5dfc8); }
+    .img-type-writing   { background: linear-gradient(135deg, #ece8fa, #d4cef5); }
+    .img-type-minecraft { background: linear-gradient(135deg, #d8f0e4, #c9e8d8); }
+    .img-type-game      { background: linear-gradient(135deg, #ddeefa, #c5dff5); }
+
+    /* ── ARTICLE BODY TYPOGRAPHY ── */
+    .article-body {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #3a3545;
+    }
+
+    .article-body p {
+      margin-bottom: 1.4rem;
+    }
+
+    .article-body h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-top: 2.5rem;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.3px;
+    }
+
+    .article-body h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-top: 2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .article-body li { margin-bottom: 0.4rem; }
+
+    .article-body img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid #c4b8e8;
+      padding: 0.6rem 1.25rem;
+      margin: 1.75rem 0;
+      color: #7b6aaa;
+      font-style: italic;
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      background: rgba(196,184,232,0.08);
+      border-radius: 0 10px 10px 0;
+    }
+
+    /* ── TAG LIST ── */
+    .article-tags {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,0.07);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .tags-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #c0baca;
+      margin-right: 0.25rem;
+    }
+
+    .tag-pill {
+      background: rgba(0,0,0,0.05);
+      color: #7e789e;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* ── ERROR / LOADING ── */
+    .status-msg {
+      text-align: center;
+      padding: 5rem 2rem;
+      color: #bab4cc;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #b8b2c8;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- NAV -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <button class="nav-btn">Games <span class="arrow">▼</span></button>
+        <div class="dropdown">
+          <a href="mira.html"><span class="icon icon-games">M</span>Mira</a>
+        </div>
+      </li>
+      <li><a href="minecraft.html">Minecraft</a></li>
+      <li>
+        <button class="nav-btn">Art <span class="arrow">▼</span></button>
+        <div class="dropdown">
+          <a href="universeart.html"><span class="icon icon-uni">U</span>Universe</a>
+          <a href="overwatchart.html"><span class="icon icon-art">O</span>Overwatch</a>
+          <a href="cobblemonart.html"><span class="icon icon-mc">C</span>Cobblemon</a>
+        </div>
+      </li>
+      <li><a href="universe.html">Universe</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-socials">
+      <a href="https://www.instagram.com/william._schell/" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" title="Reddit"><i class="fa-brands fa-reddit-alien"></i></a>
+      <a href="contact.html" title="Contact"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </nav>
+
+  <!-- BACK LINK -->
+  <div class="back-bar">
+    <a class="back-link" href="javascript:history.back()">← Back</a>
+  </div>
+
+  <!-- ARTICLE — filled by JS -->
+  <article class="article" id="article-container">
+    <p class="status-msg">Loading...</p>
+  </article>
+
+  <footer>&copy; 2025 Duckzi. All rights reserved.</footer>
+
+  <script>
+    const TYPE_CONFIG = {
+      art:       { label: 'Art',       badge: 'badge-art',       emoji: '🎨' },
+      writing:   { label: 'Writing',   badge: 'badge-writing',   emoji: '✍️'  },
+      minecraft: { label: 'Minecraft', badge: 'badge-minecraft', emoji: '⛏️' },
+      game:      { label: 'Game',      badge: 'badge-game',      emoji: '🎮' },
+    };
+
+    function fmtDate(d) {
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    }
+
+    // get ?id= from the URL
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    if (!postId) {
+      document.getElementById('article-container').innerHTML =
+        '<p class="status-msg">No post specified. <a href="index.html">Go home →</a></p>';
+    } else {
+      fetch('posts.json')
+        .then(r => r.json())
+        .then(posts => {
+          const post = posts.find(p => p.id === postId);
+
+          if (!post) {
+            document.getElementById('article-container').innerHTML =
+              '<p class="status-msg">Post not found. <a href="index.html">Go home →</a></p>';
+            return;
+          }
+
+          // update page title
+          document.title = `${post.title} — Duckzi`;
+
+          const cfg = TYPE_CONFIG[post.type] || { label: post.type, badge: 'badge-writing', emoji: '📄' };
+
+          // hero image or emoji placeholder
+          const heroImg = post.image
+            ? `<img src="${post.image}" alt="${post.title}" onerror="this.parentElement.innerHTML='${cfg.emoji}'">`
+            : cfg.emoji;
+
+          // tags
+          const tagsHtml = post.tags && post.tags.length
+            ? `<div class="article-tags">
+                <span class="tags-label">Tags</span>
+                ${post.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
+               </div>`
+            : '';
+
+          document.getElementById('article-container').innerHTML = `
+            <div class="article-header">
+              <div class="article-meta">
+                <span class="type-badge ${cfg.badge}">${cfg.label}</span>
+                <span class="article-date">${fmtDate(post.date)}</span>
+              </div>
+              <h1>${post.title}</h1>
+              ${post.subtitle ? `<p class="article-subtitle">${post.subtitle}</p>` : ''}
+            </div>
+
+            <div class="article-hero-img img-type-${post.type}">${heroImg}</div>
+
+            <div class="article-body">
+              ${post.content || `<p>${post.description}</p>`}
+            </div>
+
+            ${tagsHtml}
+          `;
+        })
+        .catch(() => {
+          document.getElementById('article-container').innerHTML =
+            '<p class="status-msg">Could not load post. <a href="index.html">Go home →</a></p>';
+        });
+    }
+  </script>
+</body>
+</html>
