@@ -6,7 +6,7 @@
   <title>Duckzi — Game Developer & Creator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,54 +15,41 @@
       background: #f5f3ef;
       color: #2d2a35;
       min-height: 100vh;
-      position: relative;
       overflow-x: hidden;
     }
 
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.45;
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* ── BLOBS ── */
+    .blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; pointer-events: none; z-index: 0; }
     .blob-1 { width: 420px; height: 420px; background: #d4cef5; top: -100px; right: -80px; }
     .blob-2 { width: 340px; height: 340px; background: #f5dfc8; bottom: 60px; left: -80px; }
     .blob-3 { width: 260px; height: 260px; background: #c9e8d8; top: 40%; left: 35%; }
 
-    /* bar at the top of the screen */
+    /* ── NAV ── */
     nav {
-      background: rgba(250,248,244,0.85);
+      background: rgba(250,248,244,0.88);
       backdrop-filter: blur(14px);
-      padding: 2rem 2.5rem;
+      padding: 0 2.5rem;
       display: flex;
       align-items: center;
-      justify-content: center; /* 👈 THIS centers everything */
+      justify-content: center;
       gap: 2rem;
       border-bottom: 1px solid rgba(0,0,0,0.07);
       position: sticky;
       top: 0;
       z-index: 100;
+      height: 68px;
     }
 
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      list-style: none;
-      align-items: center;
-    }
-
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
     .nav-links li { position: relative; }
 
     .nav-links a, .nav-btn {
       color: #1f1f1f;
       text-decoration: none;
-      font-size: 1.3rem;
-      padding: 1rem 1rem;
+      font-size: 1rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 999px;
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
@@ -73,41 +60,23 @@
       font-weight: 700;
     }
 
-    .nav-links a:hover, .nav-btn:hover {
-      background: transparent; /* removes bubble */
-      color: #7b6aaa;          /* purple hover text */
-    }
-    .nav-socials {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1.5rem;
-    }
+    .nav-links a:hover, .nav-btn:hover { color: #7b6aaa; }
 
-    .nav-socials a {
-      font-size: 1.6rem;
-      text-decoration: none;
-      color: #1f1f1f;
-      transition: color 0.2s;
-    }
-
-    .nav-socials a:hover {
-      color: #7b6aaa;
-    }
-
-    .arrow { font-size: 0.6rem; opacity: 0.5; transition: transform 0.2s; }
+    .arrow { font-size: 0.55rem; opacity: 0.5; transition: transform 0.2s; }
     .nav-links li:hover .arrow { transform: rotate(180deg); }
 
     .dropdown {
       display: none;
       position: absolute;
-      top: calc(100% + 0.15rem);
+      top: calc(100% + 0.4rem);
       left: 0;
       background: #fefcfa;
       border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 16px;
-      padding: 0.1rem;
-      min-width: 215px;
-      box-shadow: 0 6px 28px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      padding: 0.4rem;
+      min-width: 180px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      z-index: 200;
     }
 
     .nav-links li:hover .dropdown { display: block; }
@@ -115,47 +84,35 @@
     .dropdown a {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 1rem;
-      border-radius: 10px;
-      color: #1f1f1f;
-      font-size: 1.3rem;
-      text-decoration: none;
-    }
-
-    .dropdown a:hover {
-      background: transparent;
-      color: #7b6aaa;
-      font-weight: 700;
-    }
-
-    .icon {
-      width: 28px; height: 28px;
+      gap: 0.6rem;
+      padding: 0.65rem 0.8rem;
       border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; flex-shrink: 0;
+      color: #1f1f1f;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s;
     }
-    .icon-games { background: #ddeefa; }
-    .icon-art   { background: #fdefd8; }
-    .icon-mc    { background: #d8f0e4; }
-    .icon-uni   { background: #ece8fa; }
+    .dropdown a:hover { color: #7b6aaa; }
+
+    .icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; font-weight: 700; }
+    .icon-games { background: #ddeefa; color: #3a7abf; }
+    .icon-art   { background: #fdefd8; color: #b07a2a; }
+    .icon-mc    { background: #d8f0e4; color: #2a8a50; }
+    .icon-uni   { background: #ece8fa; color: #7b6aaa; }
+
+    .nav-socials { display: flex; gap: 1.25rem; align-items: center; }
+    .nav-socials a { font-size: 1.2rem; color: #1f1f1f; text-decoration: none; transition: color 0.2s; }
+    .nav-socials a:hover { color: #7b6aaa; }
 
     /* ── HERO ── */
     .hero {
-      padding: 6rem 2.5rem 5rem;
-      max-width: 820px;
+      padding: 5rem 2.5rem 3.5rem;
+      max-width: 860px;
       margin: auto;
       text-align: center;
       position: relative;
       z-index: 1;
-    }
-
-    .eyebrow {
-      font-size: 0.75rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #a89fc0;
-      margin-bottom: 1.25rem;
     }
 
     .hero h1 {
@@ -163,34 +120,20 @@
       font-size: clamp(2.4rem, 6vw, 3.4rem);
       font-weight: 600;
       color: #2d2a35;
-      letter-spacing: -1px;
+      letter-spacing: -0.5px;
       line-height: 1.15;
-      margin-bottom: 1.35rem;
+      margin-bottom: 1.2rem;
     }
 
-    .hero h1 .accent { color: #7b6aaa; }
+    .hero h1 .accent { color: #7b6aaa; font-style: italic; }
 
     .hero p {
       font-size: 1rem;
       color: #8a849c;
       line-height: 1.85;
-      max-width: 460px;
-      margin: 0 auto 2.5rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
     }
-
-    .ctas { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-    .btn-primary {
-      background: #7b6aaa;
-      color: #fff;
-      padding: 0.68rem 1.65rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-    .btn-primary:hover { background: #6a5a95; }
 
     .btn-ghost {
       background: rgba(0,0,0,0.04);
@@ -202,73 +145,244 @@
       font-weight: 500;
       border: 1px solid rgba(0,0,0,0.1);
       transition: background 0.2s;
+      display: inline-block;
     }
     .btn-ghost:hover { background: rgba(0,0,0,0.08); }
 
-    /* ── WORK CARDS ── */
-    .section {
-      padding: 2.5rem 2.5rem 5rem;
-      max-width: 820px;
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid rgba(0,0,0,0.07); margin: 0 2.5rem; position: relative; z-index: 1; }
+
+    /* ── FEATURED GAME ── */
+    .content-section {
+      max-width: 960px;
       margin: auto;
+      padding: 3rem 2.5rem 2rem;
       position: relative;
       z-index: 1;
     }
 
-    .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #bab4cc;
-      margin-bottom: 1.35rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    .section-header {
+      display: flex;
+      align-items: baseline;
       gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .card {
-      background: rgba(255,255,255,0.7);
+    .section-title {
+      font-family: 'Lora', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #2d2a35;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c0baca;
+    }
+
+    /* featured banner card */
+    .featured-card {
+      background: rgba(255,255,255,0.78);
       border: 1px solid rgba(0,0,0,0.07);
-      border-radius: 20px;
-      padding: 1.5rem 1.25rem;
-      transition: box-shadow 0.25s, transform 0.25s;
+      border-radius: 22px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
       text-decoration: none;
-      display: block;
       color: inherit;
-      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: stretch;
+      transition: box-shadow 0.3s, transform 0.3s;
+      min-height: 200px;
     }
 
-    .card:hover {
-      box-shadow: 0 8px 28px rgba(100,80,160,0.12);
+    .featured-card:hover {
+      box-shadow: 0 12px 40px rgba(100,80,160,0.13);
       transform: translateY(-3px);
     }
 
-    .card-icon { font-size: 1.9rem; margin-bottom: 0.9rem; display: block; }
-
-    .card h3 {
-      font-family: 'Lora', serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #2d2a35;
-      margin-bottom: 0.45rem;
+    .featured-img {
+      width: 340px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #2d2640 0%, #4a3f6b 50%, #7b6aaa 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
     }
 
-    .card p { font-size: 0.8rem; color: #9e98b2; line-height: 1.55; }
+    .featured-img img { width: 100%; height: 100%; object-fit: cover; }
 
-    hr.divider {
-      border: none;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      margin: 0 2.5rem;
+    .featured-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: #7b6aaa;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .featured-body {
+      padding: 2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-body h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .featured-body .subtitle {
+      font-size: 0.875rem;
+      color: #7b6aaa;
+      font-style: italic;
+      margin-bottom: 0.85rem;
+    }
+
+    .featured-body p {
+      font-size: 0.88rem;
+      color: #7e789e;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-primary {
+      background: #7b6aaa;
+      color: #fff;
+      padding: 0.58rem 1.3rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-block;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .btn-primary:hover { background: #6a5a95; }
+
+    /* ── 3x2 POST GRID ── */
+    .posts-section {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem 2.5rem 5rem;
       position: relative;
       z-index: 1;
+    }
+
+    /* exactly 3 columns */
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+    }
+
+    .post-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+
+    .post-card:hover {
+      box-shadow: 0 8px 28px rgba(100,80,160,0.13);
+      transform: translateY(-3px);
+    }
+
+    .post-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .post-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+
+    /* gradient bg per type when no image */
+    .type-art       { background: linear-gradient(135deg, #fdefd8, #f5dfc8); }
+    .type-writing   { background: linear-gradient(135deg, #ece8fa, #d4cef5); }
+    .type-minecraft { background: linear-gradient(135deg, #d8f0e4, #c9e8d8); }
+    .type-game      { background: linear-gradient(135deg, #ddeefa, #c5dff5); }
+
+    .post-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .post-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.55rem; }
+
+    .type-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .badge-art       { background: #fdefd8; color: #b07a2a; }
+    .badge-writing   { background: #ece8fa; color: #7b6aaa; }
+    .badge-minecraft { background: #d8f0e4; color: #2a8a50; }
+    .badge-game      { background: #ddeefa; color: #3a7abf; }
+
+    .post-date { font-size: 0.7rem; color: #bab4cc; margin-left: auto; }
+
+    .post-body h3 {
+      font-family: 'Lora', serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: #2d2a35;
+      margin-bottom: 0.3rem;
+      line-height: 1.35;
+    }
+
+    .post-body .post-sub {
+      font-size: 0.78rem;
+      color: #9e98b2;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .loading-msg { color: #bab4cc; font-size: 0.88rem; padding: 1rem 0; }
+
+    /* responsive: 2 cols on tablet, 1 on mobile */
+    @media (max-width: 700px) {
+      .post-grid { grid-template-columns: 1fr; }
+      .featured-card { flex-direction: column; }
+      .featured-img { width: 100%; height: 180px; }
+    }
+    @media (min-width: 701px) and (max-width: 960px) {
+      .post-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     footer {
       padding: 2rem 2.5rem;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #b8b2c8;
       border-top: 1px solid rgba(0,0,0,0.06);
       position: relative;
@@ -282,12 +396,8 @@
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
 
+  <!-- NAV -->
   <nav>
-    
-    <div class="nav-left"></div>
-
-
-
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li>
@@ -295,11 +405,12 @@
         <div class="dropdown">
           <a href="mira.html"><span class="icon icon-games">M</span>Mira</a>
         </div>
+      </li>
       <li><a href="minecraft.html">Minecraft</a></li>
       <li>
         <button class="nav-btn">Art <span class="arrow">▼</span></button>
         <div class="dropdown">
-          <a href="universeart.html"><span class="icon icon-games">U</span>Universe</a>
+          <a href="universeart.html"><span class="icon icon-uni">U</span>Universe</a>
           <a href="overwatchart.html"><span class="icon icon-art">O</span>Overwatch</a>
           <a href="cobblemonart.html"><span class="icon icon-mc">C</span>Cobblemon</a>
         </div>
@@ -307,35 +418,118 @@
       <li><a href="universe.html">Universe</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-
     <div class="nav-socials">
-      <a href="https://www.instagram.com/william._schell/" title="Instagram">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-      <a href="#" title="Reddit">
-        <i class="fa-brands fa-reddit-alien"></i>
-      </a>
-      <a href="contact.html" title="Contact">
-        <i class="fa-solid fa-envelope"></i>
-      </a>
+      <a href="https://www.instagram.com/william._schell/" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" title="Reddit"><i class="fa-brands fa-reddit-alien"></i></a>
+      <a href="contact.html" title="Contact"><i class="fa-solid fa-envelope"></i></a>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <h1>Welcome! I'm <span class="accent">Duckzi</span></h1>
-    <p>I am a game developer solo dev, who has worked over the past years to create a unique universe with extensive lore and unique art. Much of my work lives here, from games to modding to concept art, check it out!</p>
-    <div class="ctas">
-      <a class="btn-ghost" href="about.html">About me</a>
-    </div>
+    <p>Solo game developer, world builder, and visual creator. I've spent years building a unique universe with extensive lore and original art. Explore my games, mods, and concept art below.</p>
+    <a class="btn-ghost" href="about.html">About me</a>
   </section>
 
   <hr class="divider">
 
+  <!-- FEATURED GAME -->
+  <section class="content-section">
+    <div class="section-header">
+      <h2 class="section-title">Latest Game</h2>
+      <span class="section-eyebrow">Featured</span>
+    </div>
+    <div id="featured-container"><p class="loading-msg">Loading...</p></div>
   </section>
 
-  <footer>
-    &copy; 2025 Duckzi. All rights reserved.
-  </footer>
+  <hr class="divider">
 
+  <!-- 3x2 POST GRID -->
+  <section class="posts-section">
+    <div class="section-header">
+      <h2 class="section-title">Recent Posts</h2>
+      <span class="section-eyebrow">Art · Writing · Minecraft · More</span>
+    </div>
+    <div class="post-grid" id="posts-container">
+      <p class="loading-msg">Loading...</p>
+    </div>
+  </section>
+
+  <footer>&copy; 2025 Duckzi. All rights reserved.</footer>
+
+  <script>
+    const TYPE_CONFIG = {
+      art:       { label: 'Art',       badge: 'badge-art',       emoji: '🎨' },
+      writing:   { label: 'Writing',   badge: 'badge-writing',   emoji: '✍️'  },
+      minecraft: { label: 'Minecraft', badge: 'badge-minecraft', emoji: '⛏️' },
+      game:      { label: 'Game',      badge: 'badge-game',      emoji: '🎮' },
+    };
+
+    function fmtDate(d) {
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+    }
+
+    function renderFeatured(p) {
+      const cfg = TYPE_CONFIG[p.type] || { emoji: '🎮' };
+      const imgHtml = p.image
+        ? `<img src="${p.image}" alt="${p.title}" onerror="this.style.display='none'">`
+        : cfg.emoji;
+      return `
+        <a class="featured-card" href="post.html?id=${p.id}">
+          <div class="featured-img">
+            ${imgHtml}
+            <span class="featured-badge">Latest Game</span>
+          </div>
+          <div class="featured-body">
+            <h2>${p.title}</h2>
+            ${p.subtitle ? `<p class="subtitle">${p.subtitle}</p>` : ''}
+            <p>${p.description}</p>
+            <span class="btn-primary">Read more →</span>
+          </div>
+        </a>`;
+    }
+
+    function renderCard(p) {
+      const cfg = TYPE_CONFIG[p.type] || { label: p.type, badge: 'badge-writing', emoji: '📄' };
+      const imgHtml = p.image
+        ? `<img src="${p.image}" alt="${p.title}" onerror="this.style.display='none'">`
+        : cfg.emoji;
+      return `
+        <a class="post-card" href="post.html?id=${p.id}">
+          <div class="post-img type-${p.type}">${imgHtml}</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="type-badge ${cfg.badge}">${cfg.label}</span>
+              <span class="post-date">${fmtDate(p.date)}</span>
+            </div>
+            <h3>${p.title}</h3>
+            ${p.subtitle ? `<p class="post-sub">${p.subtitle}</p>` : ''}
+          </div>
+        </a>`;
+    }
+
+    fetch('posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // featured = first post with featured:true, or first game
+        const featured = posts.find(p => p.featured) || posts.find(p => p.type === 'game') || posts[0];
+        document.getElementById('featured-container').innerHTML = featured
+          ? renderFeatured(featured)
+          : '<p class="loading-msg">No featured game yet.</p>';
+
+        // show up to 6 most recent non-featured posts in the grid
+        const rest = posts.filter(p => p.id !== featured?.id).slice(0, 6);
+        document.getElementById('posts-container').innerHTML = rest.length
+          ? rest.map(renderCard).join('')
+          : '<p class="loading-msg">No posts yet.</p>';
+      })
+      .catch(() => {
+        document.getElementById('featured-container').innerHTML = '<p class="loading-msg">Could not load content.</p>';
+        document.getElementById('posts-container').innerHTML = '';
+      });
+  </script>
 </body>
 </html>
