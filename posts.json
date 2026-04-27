@@ -1,27 +1,15 @@
 [
   {
-    "id": "mira-announcement",
+    "id": "mira-game-jam",
     "type": "game",
     "featured": true,
-    "title": "Mira — Now in Development",
-    "subtitle": "A solo-developed adventure unlike anything I've built before.",
-    "description": "Mira is my current main project — a hand-crafted adventure game set inside the universe I've been building for years.",
+    "title": "mira — game jam release",
+    "subtitle": "a short sci-fi puzzle-narrative experience",
+    "description": "My latest release, Mira was made in less than three days for the Virginia Inter-Collegiate Game Jam 2026.",
     "image": "",
     "date": "2025-06-01",
     "tags": ["game", "mira", "devlog"],
-    "content": "<p>Mira is the game I've been working toward for years. It's a solo-developed adventure set deep inside the universe I've been building — a place with its own history, its own rules, and characters that actually feel like they matter.</p><p>This first devlog is just an introduction. I want to share what the game is, where the idea came from, and where I'm hoping to take it.</p><h2>What is Mira?</h2><p>At its core, Mira is an exploration-driven adventure game. You play as a traveler moving through a world that feels lived-in — cities with history, wilderness with danger, and people with their own agendas. The story is personal. It's not about saving the world. It's about understanding it.</p><h2>Where did it come from?</h2><p>The universe behind Mira has been in development for a long time — years of notes, concept art, lore documents, and half-finished prototypes. Mira is the first time all of that is coming together into something playable.</p><p>More updates coming soon. This is just the beginning.</p>"
-  },
-  {
-    "id": "overwatch-widowmaker-concept",
-    "type": "art",
-    "featured": false,
-    "title": "Widowmaker Concept Redesign",
-    "subtitle": "A fresh take on a classic.",
-    "description": "My concept reimagining Widowmaker in a darker, more grounded aesthetic.",
-    "image": "",
-    "date": "2025-05-18",
-    "tags": ["art", "overwatch", "concept-art"],
-    "content": "<p>I've always loved Widowmaker's silhouette but felt like her design left a lot of unexplored territory. This redesign pushes her into a more grounded, tactical direction while keeping the core of what makes her recognizable.</p><h2>Design Goals</h2><p>The main thing I wanted to change was the color palette. The original leans heavily into blue-purple, which is iconic, but I wanted to explore what she'd look like in something darker — closer to operative gear than supervillain costume.</p><p>I also reworked the silhouette slightly. Her rifle is more prominent in the redesign, and I pulled her posture into something that reads more like a professional and less like a showpiece.</p><h2>Process</h2><p>Started with rough thumbnail sketches, then moved into a full character sheet. The final version includes a front view, a 3/4 view, and a detail sheet for the armor plating and accessories.</p><p>This was a fun one. Overwatch designs are interesting to work with because there's so much established visual language to push against.</p>"
+    "content": "<p>This game was a long time coming, my first one in fact! I have been working on projects on Scratch, Unity, Godot and Unreal since I was in 5th grade. I have been constantly starting new projects every other month or so for the past few years. Mira was a project to show that if I sat down and committed to a project I could get it done. All of the music, 2d art, (most of) the 3d art and writing was done by me.</p>"
   },
   {
     "id": "cobblemon-trainer-concept",
