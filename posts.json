@@ -3,13 +3,13 @@
     "id": "mira-game-jam",
     "type": "game",
     "featured": true,
-    "title": "mira — game jam release",
-    "subtitle": "a short sci-fi puzzle-narrative experience",
+    "title": "mira",
+    "subtitle": "game jam release",
     "description": "My latest release, Mira was made in less than three days for the Virginia Inter-Collegiate Game Jam 2026.",
     "image": [],
     "date": "2025-06-01",
     "tags": ["game", "mira", "devlog"],
-    "content": "<p>This game was a long time coming, my first one in fact! I have been working on projects on Scratch, Unity, Godot and Unreal since I was in 5th grade. I have been constantly starting new projects every other month or so for the past few years. Mira was a project to show that if I sat down and committed to a project I could get it done. All of the music, 2d art, (most of) the 3d art and writing was done by me.</p>"
+    "content": "<p>Mira is a short atmospheric sci-fi experience set on the planet Rema.<br />Play as a girl, Rea, in her sheltered home city, where she lives with her father after her mothers mysterious disappearance. Join Rea and discover her world with her.</p><p>Features:</p><p>&bull; A short,&nbsp;narrative-focused experience</p><p>&bull; Original soundtrack</p><p>&bull; Atmospheric 3D open world to explore</p><p>&bull; A story about memory, addiction and carving your own path</p><p>This is my first ever 3D game! I created it for a game jam over 3 days.&nbsp;I focused on atmosphere and storytelling, and I really hope it resonates with you. I do plan on doing a complete art and music overhaul one day, but for now:&nbsp;Enjoy! :)</p><p>This game was a long time coming, my first one in fact! I have been working on projects on Scratch, Unity, Godot and Unreal since I was in 5th grade. I have been constantly starting new projects every other month or so for the past few years. Mira was a project to show that if I sat down and committed to a project I could get it done. All of the music, 2d art, (most of) the 3d art and writing was done by me.</p>"
   },
   {
     "id": "cobblemon-trainer-concept",
