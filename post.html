@@ -79,24 +79,15 @@
     .nav-links li:hover .dropdown { display: block; }
 
     .dropdown a {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.65rem 0.8rem;
-      border-radius: 8px;
-      color: #1f1f1f;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.15s;
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 0.8rem; border-radius: 8px;
+      color: #1f1f1f; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; transition: color 0.15s;
     }
     .dropdown a:hover { color: #7b6aaa; }
 
     .icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; font-weight: 700; }
     .icon-games { background: #ddeefa; color: #3a7abf; }
-    .icon-art   { background: #fdefd8; color: #b07a2a; }
-    .icon-mc    { background: #d8f0e4; color: #2a8a50; }
-    .icon-uni   { background: #ece8fa; color: #7b6aaa; }
 
     .nav-socials { display: flex; gap: 1.25rem; align-items: center; }
     .nav-socials a { font-size: 1.2rem; color: #1f1f1f; text-decoration: none; transition: color 0.2s; }
@@ -104,9 +95,9 @@
 
     /* ── BACK LINK ── */
     .back-bar {
-      max-width: 780px;
+      max-width: 680px;
       margin: auto;
-      padding: 1.75rem 2.5rem 0;
+      padding: 1.75rem 2rem 0;
       position: relative;
       z-index: 1;
     }
@@ -123,23 +114,143 @@
     }
     .back-link:hover { color: #7b6aaa; }
 
-    /* ── ARTICLE ── */
-    .article {
-      max-width: 780px;
-      margin: auto;
-      padding: 2.5rem 2.5rem 6rem;
+    /* ── POST WRAPPER — narrow like an instagram post ── */
+    .post-wrap {
+      max-width: 680px;
+      margin: 1.5rem auto 5rem;
+      padding: 0 2rem;
       position: relative;
       z-index: 1;
     }
 
-    /* header area */
-    .article-header { margin-bottom: 2.5rem; }
+    /* ── CAROUSEL ── */
+    .carousel {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      background: #e8e4f0;
+      margin-bottom: 0;
+      user-select: none;
+    }
 
-    .article-meta {
+    /* placeholder shown when no images */
+    .carousel-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .img-type-art       { background: linear-gradient(135deg, #fdefd8, #f5dfc8); }
+    .img-type-writing   { background: linear-gradient(135deg, #ece8fa, #d4cef5); }
+    .img-type-minecraft { background: linear-gradient(135deg, #d8f0e4, #c9e8d8); }
+    .img-type-game      { background: linear-gradient(135deg, #ddeefa, #c5dff5); }
+
+    /* slides track */
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* arrow buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: #2d2a35;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .carousel-btn:hover {
+      background: #fff;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn.prev { left: 12px; }
+    .carousel-btn.next { right: 12px; }
+    .carousel-btn:disabled { opacity: 0; pointer-events: none; }
+
+    /* dot indicators */
+    .carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .dot.active {
+      background: #fff;
+      transform: scale(1.3);
+    }
+
+    /* image counter badge */
+    .carousel-counter {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      z-index: 5;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── POST INFO BELOW CAROUSEL (instagram style) ── */
+    .post-info {
+      padding: 1.25rem 0.25rem 0;
+    }
+
+    .post-meta {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      margin-bottom: 1.1rem;
+      margin-bottom: 0.85rem;
     }
 
     .type-badge {
@@ -155,74 +266,59 @@
     .badge-minecraft { background: #d8f0e4; color: #2a8a50; }
     .badge-game      { background: #ddeefa; color: #3a7abf; }
 
-    .article-date { font-size: 0.78rem; color: #bab4cc; }
+    .post-date { font-size: 0.78rem; color: #bab4cc; }
 
-    .article-header h1 {
+    .post-info h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
       font-weight: 600;
       color: #2d2a35;
-      letter-spacing: -0.5px;
-      line-height: 1.15;
-      margin-bottom: 0.6rem;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 0.45rem;
     }
 
-    .article-subtitle {
-      font-size: 1.05rem;
+    .post-subtitle {
+      font-size: 0.95rem;
       color: #7b6aaa;
       font-style: italic;
       font-family: 'Lora', serif;
       margin-bottom: 1.5rem;
     }
 
-    /* hero image */
-    .article-hero-img {
-      width: 100%;
-      aspect-ratio: 16/7;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
+    /* ── DIVIDER ── */
+    .post-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin: 1.75rem 0;
     }
 
-    .article-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .img-type-art       { background: linear-gradient(135deg, #fdefd8, #f5dfc8); }
-    .img-type-writing   { background: linear-gradient(135deg, #ece8fa, #d4cef5); }
-    .img-type-minecraft { background: linear-gradient(135deg, #d8f0e4, #c9e8d8); }
-    .img-type-game      { background: linear-gradient(135deg, #ddeefa, #c5dff5); }
-
-    /* ── ARTICLE BODY TYPOGRAPHY ── */
+    /* ── ARTICLE BODY ── */
     .article-body {
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.85;
       color: #3a3545;
     }
 
-    .article-body p {
-      margin-bottom: 1.4rem;
-    }
+    .article-body p { margin-bottom: 1.4rem; }
 
     .article-body h2 {
       font-family: 'Lora', serif;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: #2d2a35;
-      margin-top: 2.5rem;
-      margin-bottom: 0.85rem;
-      letter-spacing: -0.3px;
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.2px;
     }
 
     .article-body h3 {
       font-family: 'Lora', serif;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: #2d2a35;
-      margin-top: 2rem;
-      margin-bottom: 0.7rem;
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .article-body ul, .article-body ol {
@@ -245,15 +341,15 @@
       color: #7b6aaa;
       font-style: italic;
       font-family: 'Lora', serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       background: rgba(196,184,232,0.08);
       border-radius: 0 10px 10px 0;
     }
 
-    /* ── TAG LIST ── */
+    /* ── TAGS ── */
     .article-tags {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
       border-top: 1px solid rgba(0,0,0,0.07);
       display: flex;
       flex-wrap: wrap;
@@ -262,23 +358,22 @@
     }
 
     .tags-label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: #c0baca;
-      margin-right: 0.25rem;
+      margin-right: 0.2rem;
     }
 
     .tag-pill {
       background: rgba(0,0,0,0.05);
       color: #7e789e;
-      padding: 0.25rem 0.75rem;
+      padding: 0.22rem 0.7rem;
       border-radius: 999px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 500;
     }
 
-    /* ── ERROR / LOADING ── */
     .status-msg {
       text-align: center;
       padding: 5rem 2rem;
@@ -314,14 +409,7 @@
         </div>
       </li>
       <li><a href="minecraft.html">Minecraft</a></li>
-      <li>
-        <button class="nav-btn">Art <span class="arrow">▼</span></button>
-        <div class="dropdown">
-          <a href="universeart.html"><span class="icon icon-uni">U</span>Universe</a>
-          <a href="overwatchart.html"><span class="icon icon-art">O</span>Overwatch</a>
-          <a href="cobblemonart.html"><span class="icon icon-mc">C</span>Cobblemon</a>
-        </div>
-      </li>
+      <li><a href="art.html">Art</a></li>
       <li><a href="universe.html">Universe</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -332,15 +420,13 @@
     </div>
   </nav>
 
-  <!-- BACK LINK -->
   <div class="back-bar">
     <a class="back-link" href="javascript:history.back()">← Back</a>
   </div>
 
-  <!-- ARTICLE — filled by JS -->
-  <article class="article" id="article-container">
+  <div class="post-wrap" id="post-wrap">
     <p class="status-msg">Loading...</p>
-  </article>
+  </div>
 
   <footer>&copy; 2025 Duckzi. All rights reserved.</footer>
 
@@ -356,36 +442,120 @@
       return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
     }
 
-    // get ?id= from the URL
+    // ── CAROUSEL ─────────────────────────────────────────────────────────────
+    function buildCarousel(images, type) {
+      const cfg = TYPE_CONFIG[type] || { emoji: '📄' };
+
+      // no images — show a styled placeholder
+      if (!images || images.length === 0) {
+        return `
+          <div class="carousel img-type-${type}">
+            <div class="carousel-placeholder">${cfg.emoji}</div>
+          </div>`;
+      }
+
+      // single image — no arrows or dots needed
+      if (images.length === 1) {
+        return `
+          <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carousel-track">
+              <div class="carousel-slide">
+                <img src="${images[0]}" alt="Post image" onerror="this.parentElement.innerHTML='${cfg.emoji}'">
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // multiple images
+      const slides = images.map(src => `
+        <div class="carousel-slide">
+          <img src="${src}" alt="Post image" onerror="this.style.opacity='0'">
+        </div>`).join('');
+
+      const dots = images.map((_, i) =>
+        `<span class="dot${i === 0 ? ' active' : ''}" data-index="${i}"></span>`
+      ).join('');
+
+      return `
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carousel-track">${slides}</div>
+
+          <button class="carousel-btn prev" id="btn-prev" aria-label="Previous">‹</button>
+          <button class="carousel-btn next" id="btn-next" aria-label="Next">›</button>
+
+          <div class="carousel-dots" id="carousel-dots">${dots}</div>
+          <span class="carousel-counter" id="carousel-counter">1 / ${images.length}</span>
+        </div>`;
+    }
+
+    function initCarousel(total) {
+      if (total <= 1) return;
+
+      let current = 0;
+      const track   = document.getElementById('carousel-track');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const counter = document.getElementById('carousel-counter');
+      const dots    = document.querySelectorAll('#carousel-dots .dot');
+
+      function goTo(index) {
+        current = index;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        counter.textContent = `${current + 1} / ${total}`;
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === total - 1;
+      }
+
+      btnPrev.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+      btnNext.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+
+      // dot clicks
+      dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+
+      // swipe support
+      let touchStartX = 0;
+      const car = document.getElementById('carousel');
+      car.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      car.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0 && current < total - 1) goTo(current + 1);
+          if (diff < 0 && current > 0)         goTo(current - 1);
+        }
+      }, { passive: true });
+
+      // init state
+      goTo(0);
+    }
+
+    // ── LOAD POST ─────────────────────────────────────────────────────────────
     const params = new URLSearchParams(window.location.search);
     const postId = params.get('id');
 
     if (!postId) {
-      document.getElementById('article-container').innerHTML =
+      document.getElementById('post-wrap').innerHTML =
         '<p class="status-msg">No post specified. <a href="index.html">Go home →</a></p>';
     } else {
       fetch('posts.json')
         .then(r => r.json())
         .then(posts => {
           const post = posts.find(p => p.id === postId);
-
           if (!post) {
-            document.getElementById('article-container').innerHTML =
+            document.getElementById('post-wrap').innerHTML =
               '<p class="status-msg">Post not found. <a href="index.html">Go home →</a></p>';
             return;
           }
 
-          // update page title
           document.title = `${post.title} — Duckzi`;
-
           const cfg = TYPE_CONFIG[post.type] || { label: post.type, badge: 'badge-writing', emoji: '📄' };
 
-          // hero image or emoji placeholder
-          const heroImg = post.image
-            ? `<img src="${post.image}" alt="${post.title}" onerror="this.parentElement.innerHTML='${cfg.emoji}'">`
-            : cfg.emoji;
+          // support both old "image" string and new "images" array
+          const images = post.images && post.images.length
+            ? post.images
+            : (post.image ? [post.image] : []);
 
-          // tags
           const tagsHtml = post.tags && post.tags.length
             ? `<div class="article-tags">
                 <span class="tags-label">Tags</span>
@@ -393,17 +563,19 @@
                </div>`
             : '';
 
-          document.getElementById('article-container').innerHTML = `
-            <div class="article-header">
-              <div class="article-meta">
+          document.getElementById('post-wrap').innerHTML = `
+            ${buildCarousel(images, post.type)}
+
+            <div class="post-info">
+              <div class="post-meta">
                 <span class="type-badge ${cfg.badge}">${cfg.label}</span>
-                <span class="article-date">${fmtDate(post.date)}</span>
+                <span class="post-date">${fmtDate(post.date)}</span>
               </div>
               <h1>${post.title}</h1>
-              ${post.subtitle ? `<p class="article-subtitle">${post.subtitle}</p>` : ''}
+              ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
             </div>
 
-            <div class="article-hero-img img-type-${post.type}">${heroImg}</div>
+            <hr class="post-divider">
 
             <div class="article-body">
               ${post.content || `<p>${post.description}</p>`}
@@ -411,9 +583,12 @@
 
             ${tagsHtml}
           `;
+
+          // init carousel JS after HTML is injected
+          initCarousel(images.length);
         })
         .catch(() => {
-          document.getElementById('article-container').innerHTML =
+          document.getElementById('post-wrap').innerHTML =
             '<p class="status-msg">Could not load post. <a href="index.html">Go home →</a></p>';
         });
     }
