@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --white: #ffffff; --dark: #111111; --mid: #777777; --font: 'Rubik', sans-serif; }
@@ -26,12 +25,10 @@
     .nav-socials a { color: rgba(255,255,255,0.5); font-size: 1rem; text-decoration: none; transition: color 0.2s; }
     .nav-socials a:hover { color: var(--white); }
 
-    /* BACK */
     .back-bar { max-width: 760px; margin: auto; padding: 8rem 2.5rem 0; }
     .back-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
     .back-link:hover { color: var(--white); }
 
-    /* POST */
     .post-wrap { max-width: 760px; margin: 2rem auto 6rem; padding: 0 2.5rem; }
 
     /* CAROUSEL */
@@ -40,7 +37,6 @@
     .carousel-track { display:flex;width:100%;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     .carousel-slide { flex:0 0 100%;min-width:0; }
     .carousel-slide img { width:100%;height:auto;display:block; }
-
     .carousel-btn {
       position:absolute;top:50%;transform:translateY(-50%);
       background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.2);
@@ -52,7 +48,6 @@
     .carousel-btn.prev { left:0; }
     .carousel-btn.next { right:0; }
     .carousel-btn:disabled { opacity:0;pointer-events:none; }
-
     .carousel-counter { position:absolute;bottom:12px;right:12px;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.7);background:rgba(0,0,0,0.5);padding:0.2rem 0.55rem; }
 
     /* POST INFO */
@@ -63,27 +58,17 @@
     .post-title-row { display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.5rem; }
     .post-title-row h1 { font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;text-transform:uppercase;margin:0; }
     .post-subtitle { font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:1.5rem; }
-
     .play-btn {
-      display: inline-block;
-      flex-shrink: 0;
-      font-family: var(--font);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 0.9rem 2.25rem;
-      background: var(--white);
-      color: var(--dark);
-      border-radius: 2px;
-      transition: opacity 0.2s;
+      display: inline-block; flex-shrink: 0;
+      font-family: var(--font); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+      padding: 0.9rem 2.25rem; background: var(--white); color: var(--dark);
+      border-radius: 2px; transition: opacity 0.2s;
     }
     .play-btn:hover { opacity: 0.85; }
     .play-btn-group { display:flex;gap:0.75rem;flex-wrap:wrap;flex-shrink:0; }
 
     .post-divider { border:none;border-top:1px solid rgba(255,255,255,0.08);margin:2rem 0; }
-
     .article-body { font-size:0.95rem;line-height:1.9;color:rgba(255,255,255,0.65); }
     .article-body p { margin-bottom:1.4rem; }
     .article-body h2 { font-size:1.3rem;font-weight:700;color:var(--white);margin:2.5rem 0 0.75rem;letter-spacing:-0.02em; }
@@ -92,55 +77,31 @@
     .article-body li { margin-bottom:0.4rem; }
     .article-body img { width:100%;margin:1.5rem 0; }
     .article-body blockquote { border-left:3px solid rgba(255,255,255,0.2);padding:0.6rem 1.25rem;margin:1.75rem 0;color:rgba(255,255,255,0.45);font-style:italic; }
-
     .post-inline-img { display:block;width:100%;height:auto;margin:2.5rem 0; }
-
     .article-tags { margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center; }
     .tags-label { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-right:0.5rem; }
     .tag-pill { font-size:0.7rem;letter-spacing:0.08em;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);padding:0.22rem 0.65rem; }
 
     /* 3D MODEL VIEWER */
     .model-viewer-wrap {
-      width: 100%;
-      position: relative;
-      background: #1a1a1a;
-      cursor: grab;
+      width: 100%; height: 480px;
+      position: relative; background: #1a1a1a; cursor: grab;
     }
     .model-viewer-wrap:active { cursor: grabbing; }
-    .model-viewer-wrap canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
+    .model-viewer-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
     .model-viewer-hint {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      pointer-events: none;
-      transition: opacity 0.5s;
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); pointer-events: none; transition: opacity 0.5s;
+      white-space: nowrap;
     }
     .model-viewer-hint.hidden { opacity: 0; }
     .model-loader {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--mid);
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid);
     }
 
     .status-msg { text-align:center;padding:5rem 2rem;color:var(--mid);font-size:0.9rem; }
-
     footer { border-top:1px solid rgba(255,255,255,0.08);padding:2.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;letter-spacing:0.1em;color:var(--mid); }
 
     @media (max-width: 768px) {
@@ -178,11 +139,12 @@
     </div>
   </footer>
 
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js';
-    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/loaders/GLTFLoader.js';
-    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/controls/OrbitControls.js';
+  <!-- Three.js loaded as regular scripts, not modules, to avoid CORS issues with fetch -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/controls/OrbitControls.js"></script>
 
+  <script>
     const TYPE_CONFIG = {
       art:       { label:'Art',       emoji:'🎨' },
       writing:   { label:'Writing',   emoji:'✍️' },
@@ -190,13 +152,19 @@
       game:      { label:'Game',      emoji:'🎮' },
     };
 
-    function fmtDate(d) { return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
+    function fmtDate(d) {
+      return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    }
 
     function buildCarousel(images, type) {
-      const cfg = TYPE_CONFIG[type]||{emoji:'📄'};
-      if (!images||!images.length) return `<div class="carousel"><div class="carousel-placeholder" style="background:#1e1e1e">${cfg.emoji}</div></div>`;
-      if (images.length===1) return `<div class="carousel" id="carousel"><div class="carousel-track" id="carousel-track"><div class="carousel-slide"><img src="${images[0]}" alt="Post image"></div></div></div>`;
-      const slides = images.map(s=>`<div class="carousel-slide"><img src="${s}" alt="Post image" onerror="this.style.opacity='0'"></div>`).join('');
+      const cfg = TYPE_CONFIG[type] || {emoji:'📄'};
+      if (!images || !images.length) {
+        return `<div class="carousel"><div class="carousel-placeholder" style="background:#1e1e1e">${cfg.emoji}</div></div>`;
+      }
+      if (images.length === 1) {
+        return `<div class="carousel" id="carousel"><div class="carousel-track" id="carousel-track"><div class="carousel-slide"><img src="${images[0]}" alt="Post image"></div></div></div>`;
+      }
+      const slides = images.map(s => `<div class="carousel-slide"><img src="${s}" alt="Post image" onerror="this.style.opacity='0'"></div>`).join('');
       return `<div class="carousel" id="carousel">
         <div class="carousel-track" id="carousel-track">${slides}</div>
         <button class="carousel-btn prev" id="btn-prev">‹</button>
@@ -206,34 +174,39 @@
     }
 
     function initCarousel(total) {
-      if (total<=1) return;
-      let cur=0;
-      const track=document.getElementById('carousel-track');
-      const prev=document.getElementById('btn-prev');
-      const next=document.getElementById('btn-next');
-      const counter=document.getElementById('carousel-counter');
+      if (total <= 1) return;
+      let cur = 0;
+      const track   = document.getElementById('carousel-track');
+      const prev    = document.getElementById('btn-prev');
+      const next    = document.getElementById('btn-next');
+      const counter = document.getElementById('carousel-counter');
 
       function goTo(i) {
-        cur=i; track.style.transform=`translateX(-${cur*100}%)`;
-        counter.textContent=`${cur+1} / ${total}`;
-        prev.disabled=cur===0; next.disabled=cur===total-1;
+        cur = i;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        counter.textContent = `${cur + 1} / ${total}`;
+        prev.disabled = cur === 0;
+        next.disabled = cur === total - 1;
       }
 
-      prev.addEventListener('click',()=>{ if(cur>0) goTo(cur-1); });
-      next.addEventListener('click',()=>{ if(cur<total-1) goTo(cur+1); });
+      prev.addEventListener('click', () => { if (cur > 0) goTo(cur - 1); });
+      next.addEventListener('click', () => { if (cur < total - 1) goTo(cur + 1); });
 
-      let tx=0;
-      const car=document.getElementById('carousel');
-      car.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-      car.addEventListener('touchend',e=>{
-        const d=tx-e.changedTouches[0].clientX;
-        if(Math.abs(d)>40){if(d>0&&cur<total-1)goTo(cur+1);if(d<0&&cur>0)goTo(cur-1);}
-      },{passive:true});
+      let tx = 0;
+      const car = document.getElementById('carousel');
+      car.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      car.addEventListener('touchend', e => {
+        const d = tx - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 40) {
+          if (d > 0 && cur < total - 1) goTo(cur + 1);
+          if (d < 0 && cur > 0) goTo(cur - 1);
+        }
+      }, { passive: true });
       goTo(0);
     }
 
-    function buildModelViewer(modelSrc) {
-      return `<div class="model-viewer-wrap" id="model-viewer-wrap" style="height:480px;">
+    function buildModelViewer() {
+      return `<div class="model-viewer-wrap" id="model-viewer-wrap">
         <div class="model-loader" id="model-loader">Loading model...</div>
         <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
       </div>`;
@@ -246,15 +219,12 @@
       const w = wrap.clientWidth;
       const h = wrap.clientHeight;
 
-      // Scene
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x1a1a1a);
 
-      // Camera
       const camera = new THREE.PerspectiveCamera(45, w / h, 0.01, 1000);
       camera.position.set(0, 1, 3);
 
-      // Renderer
       const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(w, h);
@@ -263,9 +233,7 @@
       renderer.toneMappingExposure = 1.2;
       wrap.appendChild(renderer.domElement);
 
-      // Lights
-      const ambient = new THREE.AmbientLight(0xffffff, 0.6);
-      scene.add(ambient);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
       const key = new THREE.DirectionalLight(0xffffff, 1.2);
       key.position.set(2, 4, 3);
       scene.add(key);
@@ -273,14 +241,12 @@
       fill.position.set(-2, 0, -2);
       scene.add(fill);
 
-      // Controls
-      const controls = new OrbitControls(camera, renderer.domElement);
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.08;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 1.5;
 
-      // Stop auto-rotate on interaction, hint fades
       const hint = document.getElementById('model-hint');
       let interacted = false;
       wrap.addEventListener('pointerdown', () => {
@@ -291,48 +257,40 @@
         }
       });
 
-      // Load model
-      const loader = new GLTFLoader();
+      const loader = new THREE.GLTFLoader();
       loader.load(
         modelSrc,
         (gltf) => {
           const model = gltf.scene;
-
-          // Center and scale to fit
           const box = new THREE.Box3().setFromObject(model);
           const center = box.getCenter(new THREE.Vector3());
           const size = box.getSize(new THREE.Vector3());
           const maxDim = Math.max(size.x, size.y, size.z);
           const scale = 2 / maxDim;
-          model.position.sub(center.multiplyScalar(scale));
+          model.position.copy(center).multiplyScalar(-scale);
           model.scale.setScalar(scale);
-
           scene.add(model);
 
-          // Fit camera
-          camera.position.set(0, size.y * scale * 0.5, maxDim * scale * 2);
+          camera.position.set(0, size.y * scale * 0.5, maxDim * scale * 2.5);
           controls.target.set(0, 0, 0);
           controls.update();
 
-          // Hide loader
-          const loader_el = document.getElementById('model-loader');
-          if (loader_el) loader_el.style.display = 'none';
+          const el = document.getElementById('model-loader');
+          if (el) el.style.display = 'none';
         },
         (xhr) => {
-          const loader_el = document.getElementById('model-loader');
-          if (loader_el && xhr.total) {
-            const pct = Math.round(xhr.loaded / xhr.total * 100);
-            loader_el.textContent = `Loading... ${pct}%`;
+          const el = document.getElementById('model-loader');
+          if (el && xhr.total) {
+            el.textContent = `Loading... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
           }
         },
         (err) => {
-          const loader_el = document.getElementById('model-loader');
-          if (loader_el) loader_el.textContent = 'Could not load model.';
+          const el = document.getElementById('model-loader');
+          if (el) el.textContent = 'Could not load model.';
           console.error(err);
         }
       );
 
-      // Resize
       window.addEventListener('resize', () => {
         const nw = wrap.clientWidth;
         camera.aspect = nw / h;
@@ -340,90 +298,86 @@
         renderer.setSize(nw, h);
       });
 
-      // Animate
-      function animate() {
+      (function animate() {
         requestAnimationFrame(animate);
         controls.update();
         renderer.render(scene, camera);
-      }
-      animate();
+      })();
     }
 
+    // ── LOAD POST ──
     const postId = new URLSearchParams(window.location.search).get('id');
     if (!postId) {
-      document.getElementById('post-wrap').innerHTML='<p class="status-msg">No post specified. <a href="index.html" style="color:#fff">Go home →</a></p>';
+      document.getElementById('post-wrap').innerHTML = '<p class="status-msg">No post specified. <a href="index.html" style="color:#fff">Go home →</a></p>';
     } else {
-      fetch('posts.json').then(r=>r.json()).then(posts=>{
-        const post=posts.find(p=>p.id===postId);
-        if (!post) { document.getElementById('post-wrap').innerHTML='<p class="status-msg">Post not found. <a href="index.html" style="color:#fff">Go home →</a></p>'; return; }
-        document.title=`${post.title} — Duckzi`;
-        const cfg=TYPE_CONFIG[post.type]||{label:post.type,emoji:'📄'};
-        const images=(post.images&&post.images.filter(Boolean).length)?post.images.filter(Boolean):(post.image?[post.image]:[]);
-        const tagsHtml=post.tags&&post.tags.length?`<div class="article-tags"><span class="tags-label">Tags</span>${post.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>`:'';
-        // Use 3D viewer if model field is present, otherwise fall back to carousel
-        const topMedia = post.model ? buildModelViewer(post.model) : buildCarousel(images, post.type);
-        // Build interleaved body: text1, image1, text2, image2, text3, image3, text4
-        // Any slot that's empty in the JSON is simply omitted.
-        function textBlock(t) {
-          return t ? `<div class="article-body">${t}</div>` : '';
-        }
-        function inlineImg(src) {
-          return src ? `<img class="post-inline-img" src="${src}" alt="">` : '';
-        }
+      fetch('posts.json')
+        .then(r => r.json())
+        .then(posts => {
+          const post = posts.find(p => p.id === postId);
+          if (!post) {
+            document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Post not found. <a href="index.html" style="color:#fff">Go home →</a></p>';
+            return;
+          }
 
-        // Fall back: if new-style text1 isn't set, use legacy content field
-        const t1 = post.text1 || post.content || (post.description ? `<p>${post.description}</p>` : '');
-        const t2 = post.text2 || '';
-        const t3 = post.text3 || '';
-        const t4 = post.text4 || '';
-        const i1 = post.image1 || '';
-        const i2 = post.image2 || '';
-        const i3 = post.image3 || '';
+          document.title = `${post.title} — Duckzi`;
+          const cfg = TYPE_CONFIG[post.type] || { label: post.type, emoji: '📄' };
+          const images = (post.images && post.images.filter(Boolean).length) ? post.images.filter(Boolean) : (post.image ? [post.image] : []);
+          const tagsHtml = post.tags && post.tags.length
+            ? `<div class="article-tags"><span class="tags-label">Tags</span>${post.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}</div>`
+            : '';
 
-        const body = [
-          textBlock(t1),
-          inlineImg(i1),
-          textBlock(t2),
-          inlineImg(i2),
-          textBlock(t3),
-          inlineImg(i3),
-          textBlock(t4),
-        ].filter(Boolean).join('\n');
+          const topMedia = post.model ? buildModelViewer() : buildCarousel(images, post.type);
 
-        const playBtn2 = post.playLink2
-          ? `<a class="play-btn" href="${post.playLink2}" target="_blank" rel="noopener">${post.playLabel2 || 'Download'} →</a>`
-          : '';
-        const playBtn = post.playLink
-          ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
-          : '';
-        const playBtns = (playBtn2 || playBtn)
-          ? `<div class="play-btn-group">${playBtn2}${playBtn}</div>`
-          : '';
+          function textBlock(t) { return t ? `<div class="article-body">${t}</div>` : ''; }
+          function inlineImg(src) { return src ? `<img class="post-inline-img" src="${src}" alt="">` : ''; }
 
-        document.getElementById('post-wrap').innerHTML=`
-          ${topMedia}
-          <div class="post-info">
-            <div class="post-meta">
-              <span class="post-type">${cfg.label}</span>
-              <span class="post-date">${fmtDate(post.date)}</span>
+          const t1 = post.text1 || post.content || (post.description ? `<p>${post.description}</p>` : '');
+          const body = [
+            textBlock(t1),
+            inlineImg(post.image1 || ''),
+            textBlock(post.text2 || ''),
+            inlineImg(post.image2 || ''),
+            textBlock(post.text3 || ''),
+            inlineImg(post.image3 || ''),
+            textBlock(post.text4 || ''),
+          ].filter(Boolean).join('\n');
+
+          const playBtn2 = post.playLink2
+            ? `<a class="play-btn" href="${post.playLink2}" target="_blank" rel="noopener">${post.playLabel2 || 'Download'} →</a>`
+            : '';
+          const playBtn = post.playLink
+            ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
+            : '';
+          const playBtns = (playBtn2 || playBtn)
+            ? `<div class="play-btn-group">${playBtn2}${playBtn}</div>`
+            : '';
+
+          document.getElementById('post-wrap').innerHTML = `
+            ${topMedia}
+            <div class="post-info">
+              <div class="post-meta">
+                <span class="post-type">${cfg.label}</span>
+                <span class="post-date">${fmtDate(post.date)}</span>
+              </div>
+              <div class="post-title-row">
+                <h1>${post.title}</h1>
+                ${playBtns}
+              </div>
+              ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
             </div>
-            <div class="post-title-row">
-              <h1>${post.title}</h1>
-              ${playBtns}
-            </div>
-            ${post.subtitle?`<p class="post-subtitle">${post.subtitle}</p>`:''}
-          </div>
-          <hr class="post-divider">
-          ${body}
-          ${tagsHtml}`;
-        if (post.model) {
-          initModelViewer(post.model);
-        } else {
-          initCarousel(images.length);
-        }
-      }).catch(()=>{
-        document.getElementById('post-wrap').innerHTML='<p class="status-msg">Could not load post. <a href="index.html" style="color:#fff">Go home →</a></p>';
-      });
+            <hr class="post-divider">
+            ${body}
+            ${tagsHtml}`;
+
+          if (post.model) {
+            initModelViewer(post.model);
+          } else {
+            initCarousel(images.length);
+          }
+        })
+        .catch(() => {
+          document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Could not load post. <a href="index.html" style="color:#fff">Go home →</a></p>';
+        });
     }
   </script>
 </body>
