@@ -226,7 +226,7 @@
         ].filter(Boolean).join('\n');
 
         const playBtn = post.playLink
-          ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">Play Now →</a>`
+          ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
           : '';
 
         document.getElementById('post-wrap').innerHTML=`
