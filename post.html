@@ -79,6 +79,7 @@
       transition: opacity 0.2s;
     }
     .play-btn:hover { opacity: 0.85; }
+    .play-btn-group { display:flex;gap:0.75rem;flex-wrap:wrap;flex-shrink:0; }
 
     .post-divider { border:none;border-top:1px solid rgba(255,255,255,0.08);margin:2rem 0; }
 
@@ -225,8 +226,14 @@
           textBlock(t4),
         ].filter(Boolean).join('\n');
 
+        const playBtn2 = post.playLink2
+          ? `<a class="play-btn" href="${post.playLink2}" target="_blank" rel="noopener">${post.playLabel2 || 'Download'} →</a>`
+          : '';
         const playBtn = post.playLink
           ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
+          : '';
+        const playBtns = (playBtn2 || playBtn)
+          ? `<div class="play-btn-group">${playBtn2}${playBtn}</div>`
           : '';
 
         document.getElementById('post-wrap').innerHTML=`
@@ -238,7 +245,7 @@
             </div>
             <div class="post-title-row">
               <h1>${post.title}</h1>
-              ${playBtn}
+              ${playBtns}
             </div>
             ${post.subtitle?`<p class="post-subtitle">${post.subtitle}</p>`:''}
           </div>
