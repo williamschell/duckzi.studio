@@ -73,6 +73,8 @@
     .article-body img { width:100%;margin:1.5rem 0; }
     .article-body blockquote { border-left:3px solid rgba(255,255,255,0.2);padding:0.6rem 1.25rem;margin:1.75rem 0;color:rgba(255,255,255,0.45);font-style:italic; }
 
+    .post-inline-img { display:block;width:100%;height:auto;margin:2.5rem 0; }
+
     .article-tags { margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center; }
     .tags-label { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-right:0.5rem; }
     .tag-pill { font-size:0.7rem;letter-spacing:0.08em;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);padding:0.22rem 0.65rem; }
@@ -177,6 +179,34 @@
         const cfg=TYPE_CONFIG[post.type]||{label:post.type,emoji:'📄'};
         const images=(post.images&&post.images.filter(Boolean).length)?post.images.filter(Boolean):(post.image?[post.image]:[]);
         const tagsHtml=post.tags&&post.tags.length?`<div class="article-tags"><span class="tags-label">Tags</span>${post.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>`:'';
+        // Build interleaved body: text1, image1, text2, image2, text3, image3, text4
+        // Any slot that's empty in the JSON is simply omitted.
+        function textBlock(t) {
+          return t ? `<div class="article-body">${t}</div>` : '';
+        }
+        function inlineImg(src) {
+          return src ? `<img class="post-inline-img" src="${src}" alt="">` : '';
+        }
+
+        // Fall back: if new-style text1 isn't set, use legacy content field
+        const t1 = post.text1 || post.content || (post.description ? `<p>${post.description}</p>` : '');
+        const t2 = post.text2 || '';
+        const t3 = post.text3 || '';
+        const t4 = post.text4 || '';
+        const i1 = post.image1 || '';
+        const i2 = post.image2 || '';
+        const i3 = post.image3 || '';
+
+        const body = [
+          textBlock(t1),
+          inlineImg(i1),
+          textBlock(t2),
+          inlineImg(i2),
+          textBlock(t3),
+          inlineImg(i3),
+          textBlock(t4),
+        ].filter(Boolean).join('\n');
+
         document.getElementById('post-wrap').innerHTML=`
           ${buildCarousel(images,post.type)}
           <div class="post-info">
@@ -188,7 +218,7 @@
             ${post.subtitle?`<p class="post-subtitle">${post.subtitle}</p>`:''}
           </div>
           <hr class="post-divider">
-          <div class="article-body">${post.content||`<p>${post.description}</p>`}</div>
+          ${body}
           ${tagsHtml}`;
         initCarousel(images.length);
       }).catch(()=>{
