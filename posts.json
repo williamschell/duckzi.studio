@@ -23,7 +23,7 @@
     "playLabel2": "CurseForge",
     "subtitle": "For a minecraft mod",
     "description": "An interactive model for my minecraft opossum mods.",
-    "model": "models/opossum.geo.gltf",
+    "model": "models/opossum.glb",
     "date": "2025-05-10",
     "tags": ["models", "blockbench", "minecraft", "modding"],
     "content": "Interact with the model above! If you want to check out the mod, "
