@@ -195,26 +195,15 @@
     </div>
   </footer>
   <script>
-    // Beehiiv injects multiple iframes — hide everything after the first
-    function hideExtraBeehiivIframes() {
-      const wrap = document.querySelector('.beehiiv-wrap');
-      if (!wrap) return;
-      const iframes = wrap.querySelectorAll('iframe');
-      iframes.forEach((f, i) => {
-        if (i > 0) f.style.display = 'none';
+    // Log exactly what Beehiiv injects so we can target it
+    function inspectBeehiiv() {
+      const all = document.querySelectorAll('iframe, div[class*="beehiiv"], div[id*="beehiiv"]');
+      all.forEach((el, i) => {
+        console.log(i, el.tagName, el.className, el.id, el.style.cssText, el.getBoundingClientRect());
       });
     }
-
-    // Run on load and again after a short delay in case Beehiiv loads slowly
-    window.addEventListener('load', () => {
-      hideExtraBeehiivIframes();
-      setTimeout(hideExtraBeehiivIframes, 1000);
-      setTimeout(hideExtraBeehiivIframes, 3000);
-    });
-
-    // Also watch for Beehiiv adding iframes dynamically
-    const observer = new MutationObserver(hideExtraBeehiivIframes);
-    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(inspectBeehiiv, 2000);
+    setTimeout(inspectBeehiiv, 4000);
   </script>
 </body>
 </html>
