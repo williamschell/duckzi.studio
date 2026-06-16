@@ -4,6 +4,7 @@
     "type": "game",
     "featured": true,
     "title": "mira",
+    "playLink": "https://duckzi8.itch.io/mira",
     "subtitle": "game jam release",
     "description": "My latest release, Mira was made in less than three days for the Virginia Inter-Collegiate Game Jam 2026.",
     "images": ["photos/mira1.png","photos/mira2.png","photos/mira3.png"],
