@@ -110,19 +110,24 @@
       line-height: 1.75; max-width: 460px;
     }
 
-    /* Beehiiv embed override — make it blend into dark theme */
+    /* Beehiiv embed — clip extra white widget, only show the subscribe form */
     .beehiiv-wrap {
-      /* force the iframe/form to not have a white background */
       background: transparent;
+      overflow: hidden;
+      /* Beehiiv renders two iframes side by side; we only want the first one */
+      max-width: 500px;
     }
 
-    /* Beehiiv injects its own iframe; we push dark colors via CSS variables
-       that their loader respects, and clip any white borders */
     .beehiiv-wrap iframe {
-      width: 100% !important;
       border: none !important;
       background: transparent !important;
       color-scheme: dark;
+      max-width: 500px;
+    }
+
+    /* Hide any extra iframes Beehiiv injects after the first */
+    .beehiiv-wrap iframe ~ iframe {
+      display: none !important;
     }
 
     /* FOOTER */
