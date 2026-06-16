@@ -59,12 +59,13 @@
     .post-meta { display:flex;align-items:center;gap:1rem;margin-bottom:1rem; }
     .post-type { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid); }
     .post-date { font-size:0.65rem;letter-spacing:0.1em;color:var(--mid); }
-    .post-info h1 { font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;text-transform:uppercase;margin-bottom:0.5rem; }
+    .post-title-row { display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.5rem; }
+    .post-title-row h1 { font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;text-transform:uppercase;margin:0; }
     .post-subtitle { font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:1.5rem; }
 
     .play-btn {
       display: inline-block;
-      margin-top: 0.5rem;
+      flex-shrink: 0;
       font-family: var(--font);
       font-size: 0.82rem;
       font-weight: 700;
@@ -235,9 +236,11 @@
               <span class="post-type">${cfg.label}</span>
               <span class="post-date">${fmtDate(post.date)}</span>
             </div>
-            <h1>${post.title}</h1>
+            <div class="post-title-row">
+              <h1>${post.title}</h1>
+              ${playBtn}
+            </div>
             ${post.subtitle?`<p class="post-subtitle">${post.subtitle}</p>`:''}
-            ${playBtn}
           </div>
           <hr class="post-divider">
           ${body}
