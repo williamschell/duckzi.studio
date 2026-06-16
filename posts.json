@@ -26,7 +26,10 @@
     "model": "models/opossum.glb",
     "date": "2025-05-10",
     "tags": ["models", "blockbench", "minecraft", "modding"],
-    "content": "Interact with the model above! If you want to check out the mod, "
+    "text1": "Interact with the model above! If you want to check out the mod using the buttons!",
+    "image": "possomlogo.png",
+    "image1": "opossum_inventory.png",
+    "text2": "Here is the art I created for the opossums inventory system!"
   },
 
   
