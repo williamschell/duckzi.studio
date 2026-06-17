@@ -13,7 +13,7 @@
     "content" : "<p>Mira is a short atmospheric sci-fi experience set on the planet Rema.<br />Play as a girl, Rea, in her sheltered home city, where she lives with her father after her mothers mysterious disappearance. Join Rea and discover her world with her.</p><p>Features:</p><p>&bull; A short,&nbsp;narrative-focused experience</p><p>&bull; Original soundtrack</p><p>&bull; Atmospheric 3D open world to explore</p><p>&bull; A story about memory, addiction and carving your own path</p><p>This is my first ever 3D game! I created it for a game jam over 3 days.&nbsp;I focused on atmosphere and storytelling, and I really hope it resonates with you. I do plan on doing a complete art and music overhaul one day, but for now:&nbsp;Enjoy! :)</p><p>This game was a long time coming, my first one in fact! I have been working on projects on Scratch, Unity, Godot and Unreal since I was in 5th grade. I have been constantly starting new projects every other month or so for the past few years. Mira was a project to show that if I sat down and committed to a project I could get it done. All of the music, 2d art, (most of) the 3d art and writing was done by me.</p>"
   },
   {
-    "id": "opossum-minecraft",
+    "id": "opossum-minecraft-art",
     "type": "art",
     "featured": false,
     "title": "Minecraft Opossum Model",
@@ -21,14 +21,32 @@
     "playLabel": "Modrinth",
     "playLink2": "https://www.curseforge.com/minecraft/mc-mods/duckzis-opossums",
     "playLabel2": "CurseForge",
-    "description": "An interactive model for my minecraft opossum mods.",
+    "description": "An interactive model for my minecraft opossum mod.",
     "model": "models/opossum.glb",
-    "date": "2025-05-10",
-    "tags": ["models", "blockbench", "minecraft", "modding"],
+    "date": "2026-06-01",
+    "tags": ["models", "blockbench", "minecraft"],
     "text1": "Interact with the model above! If you want to check out the mod using the buttons!",
     "image": "photos/possomlogo.png",
     "image1": "photos/opossum_inventory.png",
     "text2": "Here is the art I created for the opossums inventory system!"
+  },
+  {
+    "id": "raccoon-minecraft-art",
+    "type": "art",
+    "featured": false,
+    "title": "Minecraft Raccoon Model",
+    "playLink": "https://modrinth.com/mod/duckzis-raccoons",
+    "playLabel": "Modrinth",
+    "playLink2": "https://www.curseforge.com/minecraft/mc-mods/duckzis-raccoons",
+    "playLabel2": "CurseForge",
+    "description": "An interactive model for my minecraft raccoon mod.",
+    "model": "models/raccoon.glb",
+    "date": "2026-06-15",
+    "tags": ["models", "blockbench", "minecraft"],
+    "text1": "Interact with the model above! If you want to check out the mod using the buttons!",
+    "image": "photos/raccoonlogo.png",
+    "image1": "photos/raccoon_stash.png",
+    "text2": "Here is the art I created for the raccoons stash block!"
   },
 
   
