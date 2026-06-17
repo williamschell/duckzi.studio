@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft — Duckzi</title>
+  <title>Modding — Duckzi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="post.html?id=mira-game-jam">Mira</a></li>
-      <li><a href="minecraft.html" class="active">Minecraft</a></li>
+      <li><a href="modding.html" class="active">Modding</a></li>
       <li><a href="art.html">Art</a></li>
       <li><a href="universe.html">Universe</a></li>
       <li><a href="about.html">About</a></li>
@@ -77,9 +77,9 @@
   </nav>
 
   <div class="page-top">
-    <p class="page-eyebrow">Modding & Maps</p>
-    <h1>Minecraft</h1>
-    <p>Custom mods, hand-crafted maps, modpacks, and server projects.</p>
+    <p class="page-eyebrow">Mods & Maps</p>
+    <h1>Modding</h1>
+    <p>Custom mods, hand-crafted maps, and modpacks across games.</p>
   </div>
 
   <div class="section-inner" id="posts-container">
@@ -96,7 +96,7 @@
   <script>
     function fmtDate(d) { return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}); }
     fetch('posts.json').then(r=>r.json()).then(posts=>{
-      const mc=posts.filter(p=>(p.tags||[]).includes('minecraft')).sort((a,b)=>new Date(b.date)-new Date(a.date));
+      const mc=posts.filter(p=>p.type==='modding').sort((a,b)=>new Date(b.date)-new Date(a.date));
       if (!mc.length) { document.getElementById('posts-container').innerHTML='<p class="empty-msg">Nothing here yet — check back soon.</p>'; return; }
       document.getElementById('posts-container').innerHTML=mc.map(p=>{
         const imgSrc=(p.images&&p.images.filter(Boolean)[0])||p.image||'';
