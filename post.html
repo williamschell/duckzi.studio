@@ -319,8 +319,8 @@ goTo(0);
          (gltf) => {
          
            currentModel = gltf.scene;
-           controls.target.set(0, 0, 0);
-           camera.lookAt(0, 0, 0);
+           currentModel.rotation.y = Math.PI;
+           
          
            const box = new THREE.Box3().setFromObject(currentModel);
            const center = box.getCenter(new THREE.Vector3());
