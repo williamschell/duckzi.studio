@@ -59,7 +59,7 @@
     "models": ["models/chesnaught_hazard.glb","models/delphox_kiriko.glb","models/greninja_doomfist.glb","models/mew_juno.glb","models/tinkaton_reinhardt.glb"],
     "date": "2026-01-10",
     "tags": ["art", "cobblemon", "overwatch", "minecraft"],
-    "image": "photos/vgcobblesmeticslogo.png",
+    "image": "photos/vgscobblesmeticslogo.png",
     "content": "Some models of Overwatch inspired Cobblemon cosmetics for a datapack! Here is a (growing!) list of characters skins that I have completed: <p>- Chesnaught - Hazard</p><p>- Delphox - Kiriko</p><p>- Greninja - Doomfist</p><p>- Mew - Juno</p><p>- Tinkaton - Reinhardt</p>"
   },
 ]
