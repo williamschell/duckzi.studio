@@ -1,398 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post — Duckzi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --white: #ffffff; --dark: #111111; --mid: #777777; --font: 'Rubik', sans-serif; }
-    body { font-family: var(--font); background: var(--dark); color: var(--white); overflow-x: hidden; }
-
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      padding: 1.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
-      background: rgba(17,17,17,0.92); backdrop-filter: blur(12px);
-    }
-    .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .nav-socials { display: flex; gap: 1.25rem; }
-    .nav-socials a { color: rgba(255,255,255,0.5); font-size: 1rem; text-decoration: none; transition: color 0.2s; }
-    .nav-socials a:hover { color: var(--white); }
-
-    .back-bar { max-width: 760px; margin: auto; padding: 8rem 2.5rem 0; }
-    .back-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-    .back-link:hover { color: var(--white); }
-
-    .post-wrap { max-width: 760px; margin: 2rem auto 6rem; padding: 0 2.5rem; }
-
-    /* CAROUSEL */
-    .carousel { width: 100%; background: #1a1a1a; position: relative; overflow: hidden; user-select: none; }
-    .carousel-placeholder { width:100%;padding:5rem 0;display:flex;align-items:center;justify-content:center;font-size:5rem; }
-    .carousel-track { display:flex;width:100%;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
-    .carousel-slide { flex:0 0 100%;min-width:0; }
-    .carousel-slide img { width:100%;height:auto;display:block; }
-    .carousel-btn {
-      position:absolute;top:50%;transform:translateY(-50%);
-      background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.2);
-      border-radius:0;width:44px;height:44px;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;font-size:1rem;color:var(--white);transition:background 0.2s;z-index:5;
-    }
-    .carousel-btn:hover { background:rgba(0,0,0,0.8); }
-    .carousel-btn.prev { left:0; }
-    .carousel-btn.next { right:0; }
-    .carousel-btn:disabled { opacity:0;pointer-events:none; }
-    .carousel-counter { position:absolute;bottom:12px;right:12px;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.7);background:rgba(0,0,0,0.5);padding:0.2rem 0.55rem; }
-
-    /* POST INFO */
-    .post-info { padding: 2rem 0 0; }
-    .post-meta { display:flex;align-items:center;gap:1rem;margin-bottom:1rem; }
-    .post-type { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid); }
-    .post-date { font-size:0.65rem;letter-spacing:0.1em;color:var(--mid); }
-    .post-title-row { display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.5rem; }
-    .post-title-row h1 { font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;text-transform:uppercase;margin:0; }
-    .post-subtitle { font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:1.5rem; }
-    .play-btn {
-      display: inline-block; flex-shrink: 0;
-      font-family: var(--font); font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
-      padding: 0.9rem 2.25rem; background: var(--white); color: var(--dark);
-      border-radius: 2px; transition: opacity 0.2s;
-    }
-    .play-btn:hover { opacity: 0.85; }
-    .play-btn-group { display:flex;gap:0.75rem;flex-wrap:wrap;flex-shrink:0; }
-
-    .post-divider { border:none;border-top:1px solid rgba(255,255,255,0.08);margin:2rem 0; }
-    .article-body { font-size:0.95rem;line-height:1.9;color:rgba(255,255,255,0.65); }
-    .article-body p { margin-bottom:1.4rem; }
-    .article-body h2 { font-size:1.3rem;font-weight:700;color:var(--white);margin:2.5rem 0 0.75rem;letter-spacing:-0.02em; }
-    .article-body h3 { font-size:1.05rem;font-weight:700;color:var(--white);margin:2rem 0 0.5rem; }
-    .article-body ul, .article-body ol { padding-left:1.5rem;margin-bottom:1.4rem; }
-    .article-body li { margin-bottom:0.4rem; }
-    .article-body img { width:100%;margin:1.5rem 0; }
-    .article-body blockquote { border-left:3px solid rgba(255,255,255,0.2);padding:0.6rem 1.25rem;margin:1.75rem 0;color:rgba(255,255,255,0.45);font-style:italic; }
-    .post-inline-img { display:block;width:100%;height:auto;margin:2.5rem 0; }
-    .article-tags { margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center; }
-    .tags-label { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-right:0.5rem; }
-    .tag-pill { font-size:0.7rem;letter-spacing:0.08em;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);padding:0.22rem 0.65rem; }
-
-    /* 3D MODEL VIEWER */
-    .model-viewer-wrap {
-      width: 100%; height: 480px;
-      position: relative; background: #1a1a1a; cursor: grab;
-    }
-    .model-viewer-wrap:active { cursor: grabbing; }
-    .model-viewer-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
-    .model-viewer-hint {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4); pointer-events: none; transition: opacity 0.5s;
-      white-space: nowrap;
-    }
-    .model-viewer-hint.hidden { opacity: 0; }
-    .model-loader {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid);
-    }
-
-    .status-msg { text-align:center;padding:5rem 2rem;color:var(--mid);font-size:0.9rem; }
-    footer { border-top:1px solid rgba(255,255,255,0.08);padding:2.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;letter-spacing:0.1em;color:var(--mid); }
-
-    @media (max-width: 768px) {
-      nav { padding:1.25rem; } .nav-links { display:none; }
-      .post-wrap, .back-bar { padding-left:1.25rem;padding-right:1.25rem; }
-      footer { flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem; }
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <a class="nav-logo" href="index.html">Duckzi</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="post.html?id=mira-game-jam">Mira</a></li>
-      <li><a href="modding.html">Modding</a></li>
-      <li><a href="art.html">Art</a></li>
-      <li><a href="universe.html">Universe</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <div class="nav-socials">
-      <a href="https://www.instagram.com/william._schell/"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#"><i class="fa-brands fa-reddit-alien"></i></a>
-      <a href="contact.html"><i class="fa-solid fa-envelope"></i></a>
-    </div>
-  </nav>
-
-  <div class="back-bar"><a class="back-link" href="javascript:history.back()">← Back</a></div>
-  <div class="post-wrap" id="post-wrap"><p class="status-msg">Loading...</p></div>
-
-  <footer>
-    <span>© 2025 William Schell / Duckzi</span>
-    <div style="display:flex;gap:1.25rem;">
-      <a href="https://www.instagram.com/william._schell/" style="color:inherit;text-decoration:none;"><i class="fa-brands fa-instagram"></i></a>
-    </div>
-  </footer>
-
-  <!-- Three.js r134 — last version with reliable UMD builds for GLTFLoader + OrbitControls -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
-
-  <script>
-    const TYPE_CONFIG = {
-      art:       { label:'Art',       emoji:'🎨' },
-      writing:   { label:'Writing',   emoji:'✍️' },
-      minecraft: { label:'Minecraft', emoji:'⛏️' },
-      modding:   { label:'Modding',   emoji:'🔧' },
-      game:      { label:'Game',      emoji:'🎮' },
-    };
-
-    function fmtDate(d) {
-      return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-    }
-
-    function buildCarousel(images, type) {
-      const cfg = TYPE_CONFIG[type] || {emoji:'📄'};
-      if (!images || !images.length) {
-        return `<div class="carousel"><div class="carousel-placeholder" style="background:#1e1e1e">${cfg.emoji}</div></div>`;
-      }
-      if (images.length === 1) {
-        return `<div class="carousel" id="carousel"><div class="carousel-track" id="carousel-track"><div class="carousel-slide"><img src="${images[0]}" alt="Post image"></div></div></div>`;
-      }
-      const slides = images.map(s => `<div class="carousel-slide"><img src="${s}" alt="Post image" onerror="this.style.opacity='0'"></div>`).join('');
-      return `<div class="carousel" id="carousel">
-        <div class="carousel-track" id="carousel-track">${slides}</div>
-        <button class="carousel-btn prev" id="btn-prev">‹</button>
-        <button class="carousel-btn next" id="btn-next">›</button>
-        <span class="carousel-counter" id="carousel-counter">1 / ${images.length}</span>
-      </div>`;
-    }
-
-    function initCarousel(total) {
-      if (total <= 1) return;
-      let cur = 0;
-      const track   = document.getElementById('carousel-track');
-      const prev    = document.getElementById('btn-prev');
-      const next    = document.getElementById('btn-next');
-      const counter = document.getElementById('carousel-counter');
-
-      function goTo(i) {
-        cur = i;
-        track.style.transform = `translateX(-${cur * 100}%)`;
-        counter.textContent = `${cur + 1} / ${total}`;
-        prev.disabled = cur === 0;
-        next.disabled = cur === total - 1;
-      }
-
-      prev.addEventListener('click', () => { if (cur > 0) goTo(cur - 1); });
-      next.addEventListener('click', () => { if (cur < total - 1) goTo(cur + 1); });
-
-      let tx = 0;
-      const car = document.getElementById('carousel');
-      car.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-      car.addEventListener('touchend', e => {
-        const d = tx - e.changedTouches[0].clientX;
-        if (Math.abs(d) > 40) {
-          if (d > 0 && cur < total - 1) goTo(cur + 1);
-          if (d < 0 && cur > 0) goTo(cur - 1);
-        }
-      }, { passive: true });
-      goTo(0);
-    }
-
-    function buildModelViewer() {
-      return `<div class="model-viewer-wrap" id="model-viewer-wrap">
-        <div class="model-loader" id="model-loader">Loading model...</div>
-        <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
-      </div>`;
-    }
-    function buildModelViewer(totalModels = 1) {
-      return ` <div class="model-viewer-wrap" id="model-viewer-wrap">
-        <div class="model-loader" id="model-loader">Loading model...</div>
-        <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
-        ${
-        totalModels > 1
-        ? `<button class="carousel-btn prev" id="model-prev">‹</button>
-        <button class="carousel-btn next" id="model-next">›</button>
-        <span class="carousel-counter" id="model-counter">1 / ${totalModels}</span>
-      ` : ''
-        }
-    </div>`;
-    }
-
-    function initModelViewer(modelSrc) {
-      const wrap = document.getElementById('model-viewer-wrap');
-      if (!wrap) return;
-
-      const w = wrap.clientWidth;
-      const h = wrap.clientHeight;
-
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x1a1a1a);
-
-      const camera = new THREE.PerspectiveCamera(45, w / h, 0.01, 1000);
-      camera.position.set(0, 1, 3);
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(w, h);
-      renderer.outputEncoding = THREE.sRGBEncoding;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.2;
-      wrap.appendChild(renderer.domElement);
-
-      scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-      const key = new THREE.DirectionalLight(0xffffff, 1.2);
-      key.position.set(2, 4, 3);
-      scene.add(key);
-      const fill = new THREE.DirectionalLight(0xffffff, 0.4);
-      fill.position.set(-2, 0, -2);
-      scene.add(fill);
-
-      const controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.08;
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 1.5;
-
-      const hint = document.getElementById('model-hint');
-      let interacted = false;
-      wrap.addEventListener('pointerdown', () => {
-        if (!interacted) {
-          interacted = true;
-          controls.autoRotate = false;
-          if (hint) hint.classList.add('hidden');
-        }
-      });
-
-      const loader = new THREE.GLTFLoader();
-      loader.load(
-        modelSrc,
-        (gltf) => {
-          const model = gltf.scene;
-          const box = new THREE.Box3().setFromObject(model);
-          const center = box.getCenter(new THREE.Vector3());
-          const size = box.getSize(new THREE.Vector3());
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scale = 2 / maxDim;
-          model.position.copy(center).multiplyScalar(-scale);
-          model.scale.setScalar(scale);
-          scene.add(model);
-
-          camera.position.set(0, size.y * scale * 0.5, maxDim * scale * 2.5);
-          controls.target.set(0, 0, 0);
-          controls.update();
-
-          const el = document.getElementById('model-loader');
-          if (el) el.style.display = 'none';
-        },
-        (xhr) => {
-          const el = document.getElementById('model-loader');
-          if (el && xhr.total) {
-            el.textContent = `Loading... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
-          }
-        },
-        (err) => {
-          const el = document.getElementById('model-loader');
-          if (el) el.textContent = 'Could not load model.';
-          console.error(err);
-        }
-      );
-
-      window.addEventListener('resize', () => {
-        const nw = wrap.clientWidth;
-        camera.aspect = nw / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(nw, h);
-      });
-
-      (function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-      })();
-    }
-
-    // ── LOAD POST ──
-    const postId = new URLSearchParams(window.location.search).get('id');
-    if (!postId) {
-      document.getElementById('post-wrap').innerHTML = '<p class="status-msg">No post specified. <a href="index.html" style="color:#fff">Go home →</a></p>';
-    } else {
-      fetch('posts.json')
-        .then(r => r.json())
-        .then(posts => {
-          const post = posts.find(p => p.id === postId);
-          if (!post) {
-            document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Post not found. <a href="index.html" style="color:#fff">Go home →</a></p>';
-            return;
-          }
-
-          document.title = `${post.title} — Duckzi`;
-          const cfg = TYPE_CONFIG[post.type] || { label: post.type, emoji: '📄' };
-          const images = (post.images && post.images.filter(Boolean).length) ? post.images.filter(Boolean) : (post.image ? [post.image] : []);
-          const tagsHtml = post.tags && post.tags.length
-            ? `<div class="article-tags"><span class="tags-label">Tags</span>${post.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}</div>`
-            : '';
-
-          const topMedia = post.model ? buildModelViewer() : buildCarousel(images, post.type);
-
-          function textBlock(t) { return t ? `<div class="article-body">${t}</div>` : ''; }
-          function inlineImg(src) { return src ? `<img class="post-inline-img" src="${src}" alt="">` : ''; }
-
-          const t1 = post.text1 || post.content || (post.description ? `<p>${post.description}</p>` : '');
-          const body = [
-            textBlock(t1),
-            inlineImg(post.image1 || ''),
-            textBlock(post.text2 || ''),
-            inlineImg(post.image2 || ''),
-            textBlock(post.text3 || ''),
-            inlineImg(post.image3 || ''),
-            textBlock(post.text4 || ''),
-          ].filter(Boolean).join('\n');
-
-          const playBtn2 = post.playLink2
-            ? `<a class="play-btn" href="${post.playLink2}" target="_blank" rel="noopener">${post.playLabel2 || 'Download'} →</a>`
-            : '';
-          const playBtn = post.playLink
-            ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
-            : '';
-          const playBtns = (playBtn2 || playBtn)
-            ? `<div class="play-btn-group">${playBtn2}${playBtn}</div>`
-            : '';
-
-          document.getElementById('post-wrap').innerHTML = `
-            ${topMedia}
-            <div class="post-info">
-              <div class="post-meta">
-                <span class="post-type">${cfg.label}</span>
-                <span class="post-date">${fmtDate(post.date)}</span>
-              </div>
-              <div class="post-title-row">
-                <h1>${post.title}</h1>
-                ${playBtns}
-              </div>
-              ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
-            </div>
-            <hr class="post-divider">
-            ${body}
-            ${tagsHtml}`;
-
-          if (post.model) {
-            initModelViewer(post.model);
-          } else {
-            initCarousel(images.length);
-          }
-        })
-        .catch(() => {
-          document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Could not load post. <a href="index.html" style="color:#fff">Go home →</a></p>';
-        });
-    }
-  </script>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Post — Duckzi</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+      <style>
+         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+         :root { --white: #ffffff; --dark: #111111; --mid: #777777; --font: 'Rubik', sans-serif; }
+         body { font-family: var(--font); background: var(--dark); color: var(--white); overflow-x: hidden; }
+         nav {
+         position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+         padding: 1.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
+         background: rgba(17,17,17,0.92); backdrop-filter: blur(12px);
+         }
+         .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; }
+         .nav-links { display: flex; gap: 2rem; list-style: none; }
+         .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+         .nav-links a:hover { color: var(--white); }
+         .nav-socials { display: flex; gap: 1.25rem; }
+         .nav-socials a { color: rgba(255,255,255,0.5); font-size: 1rem; text-decoration: none; transition: color 0.2s; }
+         .nav-socials a:hover { color: var(--white); }
+         .back-bar { max-width: 760px; margin: auto; padding: 8rem 2.5rem 0; }
+         .back-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+         .back-link:hover { color: var(--white); }
+         .post-wrap { max-width: 760px; margin: 2rem auto 6rem; padding: 0 2.5rem; }
+         /* CAROUSEL */
+         .carousel { width: 100%; background: #1a1a1a; position: relative; overflow: hidden; user-select: none; }
+         .carousel-placeholder { width:100%;padding:5rem 0;display:flex;align-items:center;justify-content:center;font-size:5rem; }
+         .carousel-track { display:flex;width:100%;transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+         .carousel-slide { flex:0 0 100%;min-width:0; }
+         .carousel-slide img { width:100%;height:auto;display:block; }
+         .carousel-btn {
+         position:absolute;top:50%;transform:translateY(-50%);
+         background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.2);
+         border-radius:0;width:44px;height:44px;
+         display:flex;align-items:center;justify-content:center;
+         cursor:pointer;font-size:1rem;color:var(--white);transition:background 0.2s;z-index:5;
+         }
+         .carousel-btn:hover { background:rgba(0,0,0,0.8); }
+         .carousel-btn.prev { left:0; }
+         .carousel-btn.next { right:0; }
+         .carousel-btn:disabled { opacity:0;pointer-events:none; }
+         .carousel-counter { position:absolute;bottom:12px;right:12px;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;color:rgba(255,255,255,0.7);background:rgba(0,0,0,0.5);padding:0.2rem 0.55rem; }
+         /* POST INFO */
+         .post-info { padding: 2rem 0 0; }
+         .post-meta { display:flex;align-items:center;gap:1rem;margin-bottom:1rem; }
+         .post-type { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid); }
+         .post-date { font-size:0.65rem;letter-spacing:0.1em;color:var(--mid); }
+         .post-title-row { display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.5rem; }
+         .post-title-row h1 { font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1;letter-spacing:-0.03em;text-transform:uppercase;margin:0; }
+         .post-subtitle { font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);margin-bottom:1.5rem; }
+         .play-btn {
+         display: inline-block; flex-shrink: 0;
+         font-family: var(--font); font-size: 0.82rem; font-weight: 700;
+         letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+         padding: 0.9rem 2.25rem; background: var(--white); color: var(--dark);
+         border-radius: 2px; transition: opacity 0.2s;
+         }
+         .play-btn:hover { opacity: 0.85; }
+         .play-btn-group { display:flex;gap:0.75rem;flex-wrap:wrap;flex-shrink:0; }
+         .post-divider { border:none;border-top:1px solid rgba(255,255,255,0.08);margin:2rem 0; }
+         .article-body { font-size:0.95rem;line-height:1.9;color:rgba(255,255,255,0.65); }
+         .article-body p { margin-bottom:1.4rem; }
+         .article-body h2 { font-size:1.3rem;font-weight:700;color:var(--white);margin:2.5rem 0 0.75rem;letter-spacing:-0.02em; }
+         .article-body h3 { font-size:1.05rem;font-weight:700;color:var(--white);margin:2rem 0 0.5rem; }
+         .article-body ul, .article-body ol { padding-left:1.5rem;margin-bottom:1.4rem; }
+         .article-body li { margin-bottom:0.4rem; }
+         .article-body img { width:100%;margin:1.5rem 0; }
+         .article-body blockquote { border-left:3px solid rgba(255,255,255,0.2);padding:0.6rem 1.25rem;margin:1.75rem 0;color:rgba(255,255,255,0.45);font-style:italic; }
+         .post-inline-img { display:block;width:100%;height:auto;margin:2.5rem 0; }
+         .article-tags { margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center; }
+         .tags-label { font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-right:0.5rem; }
+         .tag-pill { font-size:0.7rem;letter-spacing:0.08em;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.12);padding:0.22rem 0.65rem; }
+         /* 3D MODEL VIEWER */
+         .model-viewer-wrap {
+         width: 100%; height: 480px;
+         position: relative; background: #1a1a1a; cursor: grab;
+         }
+         .model-viewer-wrap:active { cursor: grabbing; }
+         .model-viewer-wrap canvas { width: 100% !important; height: 100% !important; display: block; }
+         .model-viewer-hint {
+         position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+         font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+         color: rgba(255,255,255,0.4); pointer-events: none; transition: opacity 0.5s;
+         white-space: nowrap;
+         }
+         .model-viewer-hint.hidden { opacity: 0; }
+         .model-loader {
+         position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+         font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid);
+         }
+         .status-msg { text-align:center;padding:5rem 2rem;color:var(--mid);font-size:0.9rem; }
+         footer { border-top:1px solid rgba(255,255,255,0.08);padding:2.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;letter-spacing:0.1em;color:var(--mid); }
+         @media (max-width: 768px) {
+         nav { padding:1.25rem; } .nav-links { display:none; }
+         .post-wrap, .back-bar { padding-left:1.25rem;padding-right:1.25rem; }
+         footer { flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem; }
+         }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <a class="nav-logo" href="index.html">Duckzi</a>
+         <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="post.html?id=mira-game-jam">Mira</a></li>
+            <li><a href="modding.html">Modding</a></li>
+            <li><a href="art.html">Art</a></li>
+            <li><a href="universe.html">Universe</a></li>
+            <li><a href="about.html">About</a></li>
+         </ul>
+         <div class="nav-socials">
+            <a href="https://www.instagram.com/william._schell/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-reddit-alien"></i></a>
+            <a href="contact.html"><i class="fa-solid fa-envelope"></i></a>
+         </div>
+      </nav>
+      <div class="back-bar"><a class="back-link" href="javascript:history.back()">← Back</a></div>
+      <div class="post-wrap" id="post-wrap">
+         <p class="status-msg">Loading...</p>
+      </div>
+      <footer>
+         <span>© 2025 William Schell / Duckzi</span>
+         <div style="display:flex;gap:1.25rem;">
+            <a href="https://www.instagram.com/william._schell/" style="color:inherit;text-decoration:none;"><i class="fa-brands fa-instagram"></i></a>
+         </div>
+      </footer>
+      <!-- Three.js r134 — last version with reliable UMD builds for GLTFLoader + OrbitControls -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+      <script>
+         const TYPE_CONFIG = {
+           art:       { label:'Art',       emoji:'🎨' },
+           writing:   { label:'Writing',   emoji:'✍️' },
+           minecraft: { label:'Minecraft', emoji:'⛏️' },
+           modding:   { label:'Modding',   emoji:'🔧' },
+           game:      { label:'Game',      emoji:'🎮' },
+         };
+         
+         function fmtDate(d) {
+           return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+         }
+         
+         function buildCarousel(images, type) {
+           const cfg = TYPE_CONFIG[type] || {emoji:'📄'};
+           if (!images || !images.length) {
+             return `<div class="carousel"><div class="carousel-placeholder" style="background:#1e1e1e">${cfg.emoji}</div></div>`;
+           }
+           if (images.length === 1) {
+             return `<div class="carousel" id="carousel"><div class="carousel-track" id="carousel-track"><div class="carousel-slide"><img src="${images[0]}" alt="Post image"></div></div></div>`;
+           }
+           const slides = images.map(s => `<div class="carousel-slide"><img src="${s}" alt="Post image" onerror="this.style.opacity='0'"></div>`).join('');
+           return `<div class="carousel" id="carousel">
+             <div class="carousel-track" id="carousel-track">${slides}</div>
+             <button class="carousel-btn prev" id="btn-prev">‹</button>
+             <button class="carousel-btn next" id="btn-next">›</button>
+             <span class="carousel-counter" id="carousel-counter">1 / ${images.length}</span>
+           </div>`;
+         }
+         function loadModel(path) {
+         
+         const loaderEl = document.getElementById('model-loader');
+         
+         loaderEl.style.display = 'flex';
+         loaderEl.textContent = 'Loading model...';
+         
+         if (currentModel) {
+         scene.remove(currentModel);
+         }
+         
+         loader.load(
+         path,
+         (gltf) => {
+         
+           currentModel = gltf.scene;
+         
+           const box = new THREE.Box3().setFromObject(currentModel);
+           const center = box.getCenter(new THREE.Vector3());
+           const size = box.getSize(new THREE.Vector3());
+         
+           const maxDim = Math.max(size.x, size.y, size.z);
+           const scale = 2 / maxDim;
+         
+           currentModel.position.copy(center).multiplyScalar(-scale);
+           currentModel.scale.setScalar(scale);
+         
+           scene.add(currentModel);
+         
+           camera.position.set(
+             0,
+             size.y * scale * 0.5,
+             maxDim * scale * 2.5
+           );
+         
+           controls.target.set(0, 0, 0);
+           controls.update();
+         
+           loaderEl.style.display = 'none';
+         }
+         );
+         }
+         
+         function initCarousel(total) {
+           if (total <= 1) return;
+           let cur = 0;
+           const track   = document.getElementById('carousel-track');
+           const prev    = document.getElementById('btn-prev');
+           const next    = document.getElementById('btn-next');
+           const counter = document.getElementById('carousel-counter');
+         
+           function goTo(i) {
+             cur = i;
+             track.style.transform = `translateX(-${cur * 100}%)`;
+             counter.textContent = `${cur + 1} / ${total}`;
+             prev.disabled = cur === 0;
+             next.disabled = cur === total - 1;
+           }
+         
+           prev.addEventListener('click', () => { if (cur > 0) goTo(cur - 1); });
+           next.addEventListener('click', () => { if (cur < total - 1) goTo(cur + 1); });
+         
+           let tx = 0;
+           const car = document.getElementById('carousel');
+           car.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+           car.addEventListener('touchend', e => {
+             const d = tx - e.changedTouches[0].clientX;
+             if (Math.abs(d) > 40) {
+               if (d > 0 && cur < total - 1) goTo(cur + 1);
+               if (d < 0 && cur > 0) goTo(cur - 1);
+             }
+           }, { passive: true });
+           goTo(0);
+         }
+         
+         function buildModelViewer() {
+           return `<div class="model-viewer-wrap" id="model-viewer-wrap">
+             <div class="model-loader" id="model-loader">Loading model...</div>
+             <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
+           </div>`;
+         }
+         function buildModelViewer(totalModels = 1) {
+           return ` <div class="model-viewer-wrap" id="model-viewer-wrap">
+             <div class="model-loader" id="model-loader">Loading model...</div>
+             <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
+             ${
+             totalModels > 1
+             ? `<button class="carousel-btn prev" id="model-prev">‹</button>
+             <button class="carousel-btn next" id="model-next">›</button>
+             <span class="carousel-counter" id="model-counter">1 / ${totalModels}</span>
+           ` : ''
+             }
+         </div>`;
+         }
+         
+         function initModelViewer(models) {
+           const wrap = document.getElementById('model-viewer-wrap');
+           if (!wrap) return;
+         
+           const w = wrap.clientWidth;
+           const h = wrap.clientHeight;
+         
+           const scene = new THREE.Scene();
+           scene.background = new THREE.Color(0x1a1a1a);
+         
+           const camera = new THREE.PerspectiveCamera(45, w / h, 0.01, 1000);
+           camera.position.set(0, 1, 3);
+         
+           const renderer = new THREE.WebGLRenderer({ antialias: true });
+           renderer.setPixelRatio(window.devicePixelRatio);
+           renderer.setSize(w, h);
+           renderer.outputEncoding = THREE.sRGBEncoding;
+           renderer.toneMapping = THREE.ACESFilmicToneMapping;
+           renderer.toneMappingExposure = 1.2;
+           wrap.appendChild(renderer.domElement);
+         
+           scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+           const key = new THREE.DirectionalLight(0xffffff, 1.2);
+           key.position.set(2, 4, 3);
+           scene.add(key);
+           const fill = new THREE.DirectionalLight(0xffffff, 0.4);
+           fill.position.set(-2, 0, -2);
+           scene.add(fill);
+         
+           const controls = new THREE.OrbitControls(camera, renderer.domElement);
+           controls.enableDamping = true;
+           controls.dampingFactor = 0.08;
+           controls.autoRotate = true;
+           controls.autoRotateSpeed = 1.5;
+         
+           const hint = document.getElementById('model-hint');
+           let interacted = false;
+           wrap.addEventListener('pointerdown', () => {
+             if (!interacted) {
+               interacted = true;
+               controls.autoRotate = false;
+               if (hint) hint.classList.add('hidden');
+             }
+           });
+         
+           const loader = new THREE.GLTFLoader();
+           let currentModel = null;
+           let currentIndex = 0;
+           loader.load(
+             modelSrc,
+             (gltf) => {
+               const model = gltf.scene;
+               const box = new THREE.Box3().setFromObject(model);
+               const center = box.getCenter(new THREE.Vector3());
+               const size = box.getSize(new THREE.Vector3());
+               const maxDim = Math.max(size.x, size.y, size.z);
+               const scale = 2 / maxDim;
+               model.position.copy(center).multiplyScalar(-scale);
+               model.scale.setScalar(scale);
+               scene.add(model);
+         
+               camera.position.set(0, size.y * scale * 0.5, maxDim * scale * 2.5);
+               controls.target.set(0, 0, 0);
+               controls.update();
+         
+               const el = document.getElementById('model-loader');
+               if (el) el.style.display = 'none';
+             },
+             (xhr) => {
+               const el = document.getElementById('model-loader');
+               if (el && xhr.total) {
+                 el.textContent = `Loading... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+               }
+             },
+             (err) => {
+               const el = document.getElementById('model-loader');
+               if (el) el.textContent = 'Could not load model.';
+               console.error(err);
+             }
+           );
+         
+           window.addEventListener('resize', () => {
+             const nw = wrap.clientWidth;
+             camera.aspect = nw / h;
+             camera.updateProjectionMatrix();
+             renderer.setSize(nw, h);
+           });
+         
+           (function animate() {
+             requestAnimationFrame(animate);
+             controls.update();
+             renderer.render(scene, camera);
+           })();
+         }
+         
+         // ── LOAD POST ──
+         const postId = new URLSearchParams(window.location.search).get('id');
+         if (!postId) {
+           document.getElementById('post-wrap').innerHTML = '<p class="status-msg">No post specified. <a href="index.html" style="color:#fff">Go home →</a></p>';
+         } else {
+           fetch('posts.json')
+             .then(r => r.json())
+             .then(posts => {
+               const post = posts.find(p => p.id === postId);
+               if (!post) {
+                 document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Post not found. <a href="index.html" style="color:#fff">Go home →</a></p>';
+                 return;
+               }
+         
+               document.title = `${post.title} — Duckzi`;
+               const cfg = TYPE_CONFIG[post.type] || { label: post.type, emoji: '📄' };
+               const images = (post.images && post.images.filter(Boolean).length) ? post.images.filter(Boolean) : (post.image ? [post.image] : []);
+               const tagsHtml = post.tags && post.tags.length
+                 ? `<div class="article-tags"><span class="tags-label">Tags</span>${post.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}</div>`
+                 : '';
+         
+               const models = post.models || (post.model ? [post.model] : []);
+         
+               const topMedia = models.length
+                 ? buildModelViewer(models.length)
+                 : buildCarousel(images, post.type);
+         
+               function textBlock(t) { return t ? `<div class="article-body">${t}</div>` : ''; }
+               function inlineImg(src) { return src ? `<img class="post-inline-img" src="${src}" alt="">` : ''; }
+         
+               const t1 = post.text1 || post.content || (post.description ? `<p>${post.description}</p>` : '');
+               const body = [
+                 textBlock(t1),
+                 inlineImg(post.image1 || ''),
+                 textBlock(post.text2 || ''),
+                 inlineImg(post.image2 || ''),
+                 textBlock(post.text3 || ''),
+                 inlineImg(post.image3 || ''),
+                 textBlock(post.text4 || ''),
+               ].filter(Boolean).join('\n');
+         
+               const playBtn2 = post.playLink2
+                 ? `<a class="play-btn" href="${post.playLink2}" target="_blank" rel="noopener">${post.playLabel2 || 'Download'} →</a>`
+                 : '';
+               const playBtn = post.playLink
+                 ? `<a class="play-btn" href="${post.playLink}" target="_blank" rel="noopener">${post.playLabel || 'Play Now'} →</a>`
+                 : '';
+               const playBtns = (playBtn2 || playBtn)
+                 ? `<div class="play-btn-group">${playBtn2}${playBtn}</div>`
+                 : '';
+         
+               document.getElementById('post-wrap').innerHTML = `
+                 ${topMedia}
+                 <div class="post-info">
+                   <div class="post-meta">
+                     <span class="post-type">${cfg.label}</span>
+                     <span class="post-date">${fmtDate(post.date)}</span>
+                   </div>
+                   <div class="post-title-row">
+                     <h1>${post.title}</h1>
+                     ${playBtns}
+                   </div>
+                   ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
+                 </div>
+                 <hr class="post-divider">
+                 ${body}
+                 ${tagsHtml}`;
+         
+               if (models.length) {
+                 initModelViewer(models);
+               } else {
+                 initCarousel(images.length);
+               }
+             })
+             .catch(() => {
+               document.getElementById('post-wrap').innerHTML = '<p class="status-msg">Could not load post. <a href="index.html" style="color:#fff">Go home →</a></p>';
+             });
+         }
+      </script>
+   </body>
 </html>
