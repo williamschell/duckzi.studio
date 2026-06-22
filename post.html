@@ -212,6 +212,19 @@
         <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
       </div>`;
     }
+    function buildModelViewer(totalModels = 1) {
+      return ` <div class="model-viewer-wrap" id="model-viewer-wrap">
+        <div class="model-loader" id="model-loader">Loading model...</div>
+        <div class="model-viewer-hint" id="model-hint">Drag to rotate · Scroll to zoom</div>
+        ${
+        totalModels > 1
+        ? `<button class="carousel-btn prev" id="model-prev">‹</button>
+        <button class="carousel-btn next" id="model-next">›</button>
+        <span class="carousel-counter" id="model-counter">1 / ${totalModels}</span>
+      ` : ''
+        }
+    </div>`;
+    }
 
     function initModelViewer(modelSrc) {
       const wrap = document.getElementById('model-viewer-wrap');
