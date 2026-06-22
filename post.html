@@ -256,7 +256,36 @@
            const loader = new THREE.GLTFLoader();
            let currentModel = null;
            let currentIndex = 0;
-            loadModel(models[0]);
+           loadModel(models[0]);
+            const prevBtn = document.getElementById('model-prev');
+const nextBtn = document.getElementById('model-next');
+const counter = document.getElementById('model-counter');
+
+function updateUI() {
+  if (counter) counter.textContent = `${currentIndex + 1} / ${models.length}`;
+}
+
+function goTo(index) {
+  currentIndex = index;
+
+  loadModel(models[currentIndex]);
+  updateUI();
+
+  if (prevBtn) prevBtn.disabled = currentIndex === 0;
+  if (nextBtn) nextBtn.disabled = currentIndex === models.length - 1;
+}
+
+if (prevBtn && nextBtn && models.length > 1) {
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) goTo(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < models.length - 1) goTo(currentIndex + 1);
+  });
+}
+
+goTo(0);
                      function loadModel(path) {
          
          const loaderEl = document.getElementById('model-loader');
