@@ -56,7 +56,7 @@
     "featured": false,
     "title": "Cobblemon Cosmetics",
     "subtitle": "Some fan-made Overwatch cosmetics for cobblemon",
-    "models": ["models/chesnaught_hazard.glb","delphox_kiriko.glb","models/greninja_doomfist.glb","models/mew_juno.glb","models/tinkaton_reinhardt.glb"],
+    "models": ["models/chesnaught_hazard.glb","models/delphox_kiriko.glb","models/greninja_doomfist.glb","models/mew_juno.glb","models/tinkaton_reinhardt.glb"],
     "date": "2026-01-10",
     "tags": ["art", "cobblemon", "overwatch", "minecraft"],
     "content": "Some models of Overwatch inspired Cobblemon cosmetics for a datapack!"
