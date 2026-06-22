@@ -51,16 +51,15 @@
 
   
   {
-    "id": "cobblemon-concept",
+    "id": "vgcobblesmetics",
     "type": "art",
     "featured": false,
-    "title": "title",
-    "subtitle": "subtitle",
-    "description": "description",
-    "images": ["",""],
-    "date": "2025-05-10",
-    "tags": ["art", "cobblemon", "concept-art", "minecraft"],
-    "content": "content"
+    "title": "Cobblemon Cosmetics",
+    "subtitle": "Some fan-made Overwatch cosmetics for cobblemon",
+    "models": ["models/chesnaught_hazard.glb","delphox_kiriko.glb","models/greninja_doomfist.glb","models/mew_juno.glb","models/tinkaton_reinhardt.glb"],
+    "date": "2026-01-10",
+    "tags": ["art", "cobblemon", "overwatch", "minecraft"],
+    "content": "Some models of Overwatch inspired Cobblemon cosmetics for a datapack!"
   },
   {
     "id": "writing example",
