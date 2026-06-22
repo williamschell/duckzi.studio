@@ -62,16 +62,4 @@
     "image": "photos/vgcobblesmeticslogo.png",
     "content": "Some models of Overwatch inspired Cobblemon cosmetics for a datapack! Here is a (growing!) list of characters skins that I have completed: <p>- Chesnaught - Hazard</p><p>- Delphox - Kiriko</p><p>- Greninja - Doomfist</p><p>- Mew - Juno</p><p>- Tinkaton - Reinhardt</p>"
   },
-  {
-    "id": "writing example",
-    "type": "writing",
-    "featured": false,
-    "title": "title",
-    "subtitle": "subtitle",
-    "description": "desc",
-    "images": ["","",""],
-    "date": "2025-04-28",
-    "tags": ["writing", "universe", "lore"],
-    "content": "content"
-  }
 ]
